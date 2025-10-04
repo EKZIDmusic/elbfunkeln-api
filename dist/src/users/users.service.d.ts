@@ -35,10 +35,9 @@ export declare class UsersService {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
             orderNumber: string;
-            userId: string;
-            addressId: string;
             status: import("@prisma/client").$Enums.OrderStatus;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -50,19 +49,20 @@ export declare class UsersService {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
+            addressId: string;
         }[];
         addresses: {
             id: string;
             firstName: string;
             lastName: string;
             createdAt: Date;
-            userId: string;
             street: string;
             city: string;
             state: string | null;
             zip: string;
             country: string;
             isDefault: boolean;
+            userId: string;
         }[];
         tickets: {
             id: string;

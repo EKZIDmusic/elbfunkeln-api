@@ -9,10 +9,10 @@ export declare class GiftCardsService {
         createdAt: Date;
         isActive: boolean;
         code: string;
-        amount: import("@prisma/client/runtime/library").Decimal;
-        purchasedBy: string | null;
         expiresAt: Date | null;
+        amount: import("@prisma/client/runtime/library").Decimal;
         balance: import("@prisma/client/runtime/library").Decimal;
+        purchasedBy: string | null;
         usedAt: Date | null;
     }>;
     findAll(): Promise<{
@@ -20,10 +20,10 @@ export declare class GiftCardsService {
         createdAt: Date;
         isActive: boolean;
         code: string;
-        amount: import("@prisma/client/runtime/library").Decimal;
-        purchasedBy: string | null;
         expiresAt: Date | null;
+        amount: import("@prisma/client/runtime/library").Decimal;
         balance: import("@prisma/client/runtime/library").Decimal;
+        purchasedBy: string | null;
         usedAt: Date | null;
     }[]>;
     findByCode(code: string): Promise<{
@@ -31,10 +31,10 @@ export declare class GiftCardsService {
         createdAt: Date;
         isActive: boolean;
         code: string;
-        amount: import("@prisma/client/runtime/library").Decimal;
-        purchasedBy: string | null;
         expiresAt: Date | null;
+        amount: import("@prisma/client/runtime/library").Decimal;
         balance: import("@prisma/client/runtime/library").Decimal;
+        purchasedBy: string | null;
         usedAt: Date | null;
     }>;
     findOne(id: string): Promise<{
@@ -42,10 +42,10 @@ export declare class GiftCardsService {
         createdAt: Date;
         isActive: boolean;
         code: string;
-        amount: import("@prisma/client/runtime/library").Decimal;
-        purchasedBy: string | null;
         expiresAt: Date | null;
+        amount: import("@prisma/client/runtime/library").Decimal;
         balance: import("@prisma/client/runtime/library").Decimal;
+        purchasedBy: string | null;
         usedAt: Date | null;
     }>;
     update(id: string, updateGiftCardDto: UpdateGiftCardDto): Promise<{
@@ -53,10 +53,10 @@ export declare class GiftCardsService {
         createdAt: Date;
         isActive: boolean;
         code: string;
-        amount: import("@prisma/client/runtime/library").Decimal;
-        purchasedBy: string | null;
         expiresAt: Date | null;
+        amount: import("@prisma/client/runtime/library").Decimal;
         balance: import("@prisma/client/runtime/library").Decimal;
+        purchasedBy: string | null;
         usedAt: Date | null;
     }>;
     remove(id: string): Promise<{
@@ -64,10 +64,10 @@ export declare class GiftCardsService {
         createdAt: Date;
         isActive: boolean;
         code: string;
-        amount: import("@prisma/client/runtime/library").Decimal;
-        purchasedBy: string | null;
         expiresAt: Date | null;
+        amount: import("@prisma/client/runtime/library").Decimal;
         balance: import("@prisma/client/runtime/library").Decimal;
+        purchasedBy: string | null;
         usedAt: Date | null;
     }>;
 }

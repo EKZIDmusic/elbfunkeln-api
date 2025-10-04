@@ -18,13 +18,14 @@ let GiftCardsService = class GiftCardsService {
         this.prisma = prisma;
     }
     async create(createGiftCardDto) {
+        const { code, amount, purchasedBy, expiresAt } = createGiftCardDto;
         return this.prisma.giftCard.create({
             data: {
-                code: createGiftCardDto.code,
-                amount: createGiftCardDto.amount,
-                balance: createGiftCardDto.amount,
-                purchasedBy: createGiftCardDto.purchasedBy ?? undefined,
-                expiresAt: createGiftCardDto.expiresAt ?? undefined,
+                code,
+                amount,
+                balance: amount,
+                purchasedBy: purchasedBy ?? undefined,
+                expiresAt: expiresAt ?? undefined,
             },
         });
     }
@@ -45,12 +46,13 @@ let GiftCardsService = class GiftCardsService {
         });
     }
     async update(id, updateGiftCardDto) {
+        const { balance, isActive, expiresAt } = updateGiftCardDto;
         return this.prisma.giftCard.update({
             where: { id },
             data: {
-                balance: updateGiftCardDto.balance ?? undefined,
-                isActive: updateGiftCardDto.isActive ?? undefined,
-                expiresAt: updateGiftCardDto.expiresAt ?? undefined,
+                balance: balance ?? undefined,
+                isActive: isActive ?? undefined,
+                expiresAt: expiresAt ?? undefined,
             },
         });
     }

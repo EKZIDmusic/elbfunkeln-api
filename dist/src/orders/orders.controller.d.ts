@@ -25,13 +25,13 @@ export declare class OrdersController {
             firstName: string;
             lastName: string;
             createdAt: Date;
-            userId: string;
             street: string;
             city: string;
             state: string | null;
             zip: string;
             country: string;
             isDefault: boolean;
+            userId: string;
         };
         items: ({
             product: {
@@ -51,18 +51,17 @@ export declare class OrdersController {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -74,6 +73,7 @@ export declare class OrdersController {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
     getUserOrders(user: UserPayload): Promise<({
         address: {
@@ -81,23 +81,23 @@ export declare class OrdersController {
             firstName: string;
             lastName: string;
             createdAt: Date;
-            userId: string;
             street: string;
             city: string;
             state: string | null;
             zip: string;
             country: string;
             isDefault: boolean;
+            userId: string;
         };
         items: ({
             product: {
                 images: {
                     id: string;
                     createdAt: Date;
-                    url: string;
-                    alt: string | null;
                     isPrimary: boolean;
                     productId: string;
+                    url: string;
+                    alt: string | null;
                 }[];
             } & {
                 id: string;
@@ -116,18 +116,17 @@ export declare class OrdersController {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -139,6 +138,7 @@ export declare class OrdersController {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     })[]>;
     findOne(id: string): Promise<{
         user: {
@@ -152,23 +152,23 @@ export declare class OrdersController {
             firstName: string;
             lastName: string;
             createdAt: Date;
-            userId: string;
             street: string;
             city: string;
             state: string | null;
             zip: string;
             country: string;
             isDefault: boolean;
+            userId: string;
         };
         items: ({
             product: {
                 images: {
                     id: string;
                     createdAt: Date;
-                    url: string;
-                    alt: string | null;
                     isPrimary: boolean;
                     productId: string;
+                    url: string;
+                    alt: string | null;
                 }[];
             } & {
                 id: string;
@@ -187,18 +187,17 @@ export declare class OrdersController {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -210,15 +209,15 @@ export declare class OrdersController {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
     cancel(id: string, user: UserPayload): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -230,6 +229,7 @@ export declare class OrdersController {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
     findAll(page?: string, limit?: string, status?: OrderStatus): Promise<{
         data: ({
@@ -257,18 +257,17 @@ export declare class OrdersController {
             } & {
                 id: string;
                 price: import("@prisma/client/runtime/library").Decimal;
-                productId: string;
                 quantity: number;
+                productId: string;
                 orderId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
             orderNumber: string;
-            userId: string;
-            addressId: string;
             status: import("@prisma/client").$Enums.OrderStatus;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -280,6 +279,7 @@ export declare class OrdersController {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
+            addressId: string;
         })[];
         meta: {
             page: number;
@@ -320,18 +320,17 @@ export declare class OrdersController {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -343,5 +342,6 @@ export declare class OrdersController {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
 }

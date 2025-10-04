@@ -70,10 +70,10 @@ export declare class CategoriesService {
             images: {
                 id: string;
                 createdAt: Date;
-                url: string;
-                alt: string | null;
                 isPrimary: boolean;
                 productId: string;
+                url: string;
+                alt: string | null;
             }[];
         } & {
             id: string;

@@ -13,10 +13,9 @@ export declare class AnalyticsService {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
             orderNumber: string;
-            userId: string;
-            addressId: string;
             status: import("@prisma/client").$Enums.OrderStatus;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -28,6 +27,7 @@ export declare class AnalyticsService {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
+            addressId: string;
         }[];
     }>;
     getTicketData(startDate: string, endDate: string): Promise<{

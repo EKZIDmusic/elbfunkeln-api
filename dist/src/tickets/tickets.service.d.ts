@@ -22,8 +22,8 @@ export declare class TicketsService {
             id: string;
             createdAt: Date;
             content: string;
-            ticketId: string;
             isStaff: boolean;
+            ticketId: string;
         }[];
     } & {
         id: string;
@@ -53,8 +53,8 @@ export declare class TicketsService {
             id: string;
             createdAt: Date;
             content: string;
-            ticketId: string;
             isStaff: boolean;
+            ticketId: string;
         }[];
     } & {
         id: string;
@@ -84,8 +84,8 @@ export declare class TicketsService {
             id: string;
             createdAt: Date;
             content: string;
-            ticketId: string;
             isStaff: boolean;
+            ticketId: string;
         }[];
     } & {
         id: string;

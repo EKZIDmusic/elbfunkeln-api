@@ -45,10 +45,10 @@ export declare class CategoriesController {
             images: {
                 id: string;
                 createdAt: Date;
-                url: string;
-                alt: string | null;
                 isPrimary: boolean;
                 productId: string;
+                url: string;
+                alt: string | null;
             }[];
         } & {
             id: string;

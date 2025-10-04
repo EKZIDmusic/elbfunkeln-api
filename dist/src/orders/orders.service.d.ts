@@ -23,13 +23,13 @@ export declare class OrdersService {
             firstName: string;
             lastName: string;
             createdAt: Date;
-            userId: string;
             street: string;
             city: string;
             state: string | null;
             zip: string;
             country: string;
             isDefault: boolean;
+            userId: string;
         };
         items: ({
             product: {
@@ -49,18 +49,17 @@ export declare class OrdersService {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -72,6 +71,7 @@ export declare class OrdersService {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
     findAll(page?: number, limit?: number, status?: OrderStatus): Promise<{
         data: ({
@@ -99,18 +99,17 @@ export declare class OrdersService {
             } & {
                 id: string;
                 price: import("@prisma/client/runtime/library").Decimal;
-                productId: string;
                 quantity: number;
+                productId: string;
                 orderId: string;
             })[];
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
             orderNumber: string;
-            userId: string;
-            addressId: string;
             status: import("@prisma/client").$Enums.OrderStatus;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -122,6 +121,7 @@ export declare class OrdersService {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
+            addressId: string;
         })[];
         meta: {
             page: number;
@@ -142,23 +142,23 @@ export declare class OrdersService {
             firstName: string;
             lastName: string;
             createdAt: Date;
-            userId: string;
             street: string;
             city: string;
             state: string | null;
             zip: string;
             country: string;
             isDefault: boolean;
+            userId: string;
         };
         items: ({
             product: {
                 images: {
                     id: string;
                     createdAt: Date;
-                    url: string;
-                    alt: string | null;
                     isPrimary: boolean;
                     productId: string;
+                    url: string;
+                    alt: string | null;
                 }[];
             } & {
                 id: string;
@@ -177,18 +177,17 @@ export declare class OrdersService {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -200,6 +199,7 @@ export declare class OrdersService {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
     findUserOrders(userId: string): Promise<({
         address: {
@@ -207,23 +207,23 @@ export declare class OrdersService {
             firstName: string;
             lastName: string;
             createdAt: Date;
-            userId: string;
             street: string;
             city: string;
             state: string | null;
             zip: string;
             country: string;
             isDefault: boolean;
+            userId: string;
         };
         items: ({
             product: {
                 images: {
                     id: string;
                     createdAt: Date;
-                    url: string;
-                    alt: string | null;
                     isPrimary: boolean;
                     productId: string;
+                    url: string;
+                    alt: string | null;
                 }[];
             } & {
                 id: string;
@@ -242,18 +242,17 @@ export declare class OrdersService {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -265,6 +264,7 @@ export declare class OrdersService {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     })[]>;
     updateStatus(id: string, status: OrderStatus): Promise<{
         user: {
@@ -298,18 +298,17 @@ export declare class OrdersService {
         } & {
             id: string;
             price: import("@prisma/client/runtime/library").Decimal;
-            productId: string;
             quantity: number;
+            productId: string;
             orderId: string;
         })[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -321,15 +320,15 @@ export declare class OrdersService {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
     cancel(id: string, userId: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        userId: string;
-        addressId: string;
         status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
@@ -341,5 +340,6 @@ export declare class OrdersService {
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
+        addressId: string;
     }>;
 }
