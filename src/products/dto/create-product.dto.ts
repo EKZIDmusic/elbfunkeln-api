@@ -5,17 +5,17 @@ import { Type } from 'class-transformer';
 export class CreateProductDto {
   @ApiProperty({ example: 'Drahtring Silber' })
   @IsString()
-  name: string;
+  name!: string;
 
   @ApiProperty({ example: 'Handgefertigter Ring aus Silberdraht' })
   @IsString()
-  description: string;
+  description!: string;
 
   @ApiProperty({ example: 49.99 })
   @Type(() => Number)
   @IsNumber()
   @Min(0)
-  price: number;
+  price!: number;
 
   @ApiProperty({ example: 39.99, required: false })
   @Type(() => Number)
@@ -26,17 +26,17 @@ export class CreateProductDto {
 
   @ApiProperty({ example: 'RING-SILVER-001' })
   @IsString()
-  sku: string;
+  sku!: string;
 
   @ApiProperty({ example: 10 })
   @Type(() => Number)
   @IsNumber()
   @Min(0)
-  stock: number;
+  stock!: number;
 
   @ApiProperty()
   @IsUUID()
-  categoryId: string;
+  categoryId!: string;
 
   @ApiProperty({ required: false, default: true })
   @IsBoolean()

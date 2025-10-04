@@ -4,11 +4,11 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateCategoryDto {
   @ApiProperty({ example: 'Ringe' })
   @IsString()
-  name: string;
+  name!: string;
 
   @ApiProperty({ example: 'ringe' })
   @IsString()
-  slug: string;
+  slug!: string;
 
   @ApiProperty({ required: false })
   @IsString()

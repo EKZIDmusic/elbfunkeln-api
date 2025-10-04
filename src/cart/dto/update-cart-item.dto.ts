@@ -7,5 +7,5 @@ export class UpdateCartItemDto {
   @Type(() => Number)
   @IsNumber()
   @Min(1)
-  quantity: number;
+  quantity!: number;
 }

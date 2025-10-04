@@ -5,11 +5,11 @@ import { Type } from 'class-transformer';
 export class AddToCartDto {
   @ApiProperty()
   @IsUUID()
-  productId: string;
+  productId!: string;
 
   @ApiProperty({ example: 1, minimum: 1 })
   @Type(() => Number)
   @IsNumber()
   @Min(1)
-  quantity: number;
+  quantity!: number;
 }
