@@ -123,15 +123,15 @@ function Convert-ToLF {
     param (
         [string]$Path
     )
-    
+
     $files = Get-ChildItem -Path $Path -Recurse -Include *.ts,*.js,*.json,*.md,*.prisma -File
-    
+
     foreach ($file in $files) {
         # Skip node_modules and dist
         if ($file.FullName -like "*\node_modules\*" -or $file.FullName -like "*\dist\*") {
             continue
         }
-        
+
         $content = Get-Content -Path $file.FullName -Raw
         if ($content) {
             # Convert CRLF to LF
@@ -210,7 +210,7 @@ Write-Host "📝 Updating package.json scripts..." -ForegroundColor Blue
 $packageJsonPath = "package.json"
 if (Test-Path $packageJsonPath) {
     $packageJson = Get-Content $packageJsonPath -Raw | ConvertFrom-Json
-    
+
     # Add lint and format scripts if they don't exist
     if (-not $packageJson.scripts.lint) {
         $packageJson.scripts | Add-Member -NotePropertyName "lint" -NotePropertyValue "eslint `"{src,apps,libs,test}/**/*.ts`" --fix" -Force
@@ -218,9 +218,9 @@ if (Test-Path $packageJsonPath) {
     if (-not $packageJson.scripts.format) {
         $packageJson.scripts | Add-Member -NotePropertyName "format" -NotePropertyValue "prettier --write `"src/**/*.ts`" `"test/**/*.ts`"" -Force
     }
-    
+
     $packageJson | ConvertTo-Json -Depth 100 | Out-File $packageJsonPath -Encoding UTF8
-    
+
     Write-Host "✅ package.json updated" -ForegroundColor Green
 }
 
@@ -235,25 +235,25 @@ function Fix-ControllerImports {
     param (
         [string]$FilePath
     )
-    
+
     if (Test-Path $FilePath) {
         $content = Get-Content -Path $FilePath -Raw
-        
+
         # Fix imports to be multi-line
-        $content = $content -replace "import \{ ([^}]+) \} from '@nestjs/common';", 
+        $content = $content -replace "import \{ ([^}]+) \} from '@nestjs/common';",
             "import {`n  `$1`n} from '@nestjs/common';"
-        
+
         # Replace user: any with UserPayload
-        $content = $content -replace "@CurrentUser\(\) user: any", 
+        $content = $content -replace "@CurrentUser\(\) user: any",
             "@CurrentUser() user: UserPayload"
-        
+
         # Add UserPayload import if @CurrentUser is used
         if ($content -match "@CurrentUser") {
             if ($content -notmatch "UserPayload") {
                 $content = "import { UserPayload } from '../common/interfaces/user-payload.interface';`n" + $content
             }
         }
-        
+
         # Convert to LF and save
         $content = $content -replace "`r`n", "`n"
         $utf8NoBom = New-Object System.Text.UTF8Encoding $false

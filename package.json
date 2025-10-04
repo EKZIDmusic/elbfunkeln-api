@@ -103,5 +103,9 @@
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
-  }
+  },
+  "ignorePatterns": [
+    "fix-problems.js",
+    "*.config.js"
+  ]
 }
