@@ -47,4 +47,9 @@ export class CreateProductDto {
   @IsBoolean()
   @IsOptional()
   isFeatured?: boolean;
+
+  @ApiProperty({ required: false, default: false })
+  @IsBoolean()
+  @IsOptional()
+  giftboxavailable?: boolean;
 }
