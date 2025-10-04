@@ -1,29 +1,43 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
-import { Payment } from './entities/payment.entity';
 
 @Injectable()
 export class PaymentsService {
-  constructor(
-    @InjectRepository(Payment)
-    private paymentsRepository: Repository<Payment>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async create(createPaymentDto: CreatePaymentDto) {
-    const payment = this.paymentsRepository.create({
-      ...createPaymentDto,
-      status: 'pending',
+    return this.prisma.order.update({
+      where: { id: createPaymentDto.orderId },
+      data: {
+        paymentStatus: 'COMPLETED',
+        stripePaymentId: createPaymentDto.transactionId,
+      },
     });
-    return this.paymentsRepository.save(payment);
   }
 
-  findAll() {
-    return this.paymentsRepository.find();
+  async findAll() {
+    return this.prisma.order.findMany({
+      where: {
+        paymentStatus: {
+          in: ['COMPLETED', 'PENDING', 'FAILED'],
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
-  findOne(id: number) {
-    return this.paymentsRepository.findOne({ where: { id } });
+  async findOne(id: string) {
+    return this.prisma.order.findUnique({
+      where: { id },
+      include: {
+        user: true,
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
   }
 }

@@ -1,5 +1,5 @@
 export class CreateShippingDto {
-  orderId!: number;
-  address!: string;
+  orderId!: string; // UUID
+  trackingNumber!: string;
   carrier!: string;
 }

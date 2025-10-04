@@ -1,5 +1,7 @@
+import { TicketPriority } from '@prisma/client';
+
 export class CreateTicketDto {
-  userId: number;
-  eventDate: Date;
-  price: number;
+  userId!: string; // UUID
+  subject!: string;
+  priority?: TicketPriority;
 }

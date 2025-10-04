@@ -1,4 +1,8 @@
+import { TicketStatus, TicketPriority } from '@prisma/client';
+
 export class UpdateTicketDto {
-  status?: string;
-  isUsed?: boolean;
+  subject?: string;
+  status?: TicketStatus;
+  priority?: TicketPriority;
+  assignedTo?: string; // UUID of assigned user
 }

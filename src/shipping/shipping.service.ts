@@ -1,31 +1,59 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateShippingDto } from './dto/create-shipping.dto';
 import { UpdateShippingDto } from './dto/update-shipping.dto';
-import { Shipping } from './entities/shipping.entity';
 
 @Injectable()
 export class ShippingService {
-  constructor(
-    @InjectRepository(Shipping)
-    private shippingRepository: Repository<Shipping>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
-  create(createShippingDto: CreateShippingDto) {
-    const shipping = this.shippingRepository.create(createShippingDto);
-    return this.shippingRepository.save(shipping);
+  async create(createShippingDto: CreateShippingDto) {
+    return this.prisma.order.update({
+      where: { id: createShippingDto.orderId },
+      data: {
+        trackingNumber: createShippingDto.trackingNumber,
+        shippingStatus: 'LABEL_CREATED',
+      },
+    });
   }
 
-  findAll() {
-    return this.shippingRepository.find();
+  async findAll() {
+    return this.prisma.order.findMany({
+      where: {
+        shippingStatus: {
+          not: 'PENDING',
+        },
+      },
+      include: {
+        user: true,
+        address: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
-  findOne(id: number) {
-    return this.shippingRepository.findOne({ where: { id } });
+  async findOne(id: string) {
+    return this.prisma.order.findUnique({
+      where: { id },
+      include: {
+        user: true,
+        address: true,
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
   }
 
-  update(id: number, updateShippingDto: UpdateShippingDto) {
-    return this.shippingRepository.update(id, updateShippingDto);
+  async update(id: string, updateShippingDto: UpdateShippingDto) {
+    return this.prisma.order.update({
+      where: { id },
+      data: {
+        trackingNumber: updateShippingDto.trackingNumber,
+        shippingStatus: updateShippingDto.status as any,
+      },
+    });
   }
 }

@@ -1,32 +1,69 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class AnalyticsService {
-  getSalesData(startDate: string, endDate: string) {
-    // Implementierung für Verkaufsdaten
+  constructor(private prisma: PrismaService) {}
+
+  async getSalesData(startDate: string, endDate: string) {
+    const orders = await this.prisma.order.findMany({
+      where: {
+        createdAt: {
+          gte: new Date(startDate),
+          lte: new Date(endDate),
+        },
+        paymentStatus: 'COMPLETED',
+      },
+    });
+
+    const totalSales = orders.reduce((sum, order) => sum + Number(order.total), 0);
+
     return {
-      totalSales: 0,
+      totalSales,
+      orderCount: orders.length,
       period: { startDate, endDate },
-      data: [],
+      data: orders,
     };
   }
 
-  getTicketData(startDate: string, endDate: string) {
-    // Implementierung für Ticket-Daten
+  async getTicketData(startDate: string, endDate: string) {
+    const tickets = await this.prisma.ticket.findMany({
+      where: {
+        createdAt: {
+          gte: new Date(startDate),
+          lte: new Date(endDate),
+        },
+      },
+    });
+
     return {
-      totalTickets: 0,
+      totalTickets: tickets.length,
       period: { startDate, endDate },
-      data: [],
+      statusBreakdown: {
+        open: tickets.filter((t) => t.status === 'OPEN').length,
+        inProgress: tickets.filter((t) => t.status === 'IN_PROGRESS').length,
+        closed: tickets.filter((t) => t.status === 'CLOSED').length,
+      },
     };
   }
 
-  getOverview() {
-    // Implementierung für Übersicht
+  async getOverview() {
+    const [totalOrders, activeDiscounts, newsletterCount] = await Promise.all([
+      this.prisma.order.count(),
+      this.prisma.discount.count({ where: { isActive: true } }),
+      this.prisma.newsletter.count({ where: { isActive: true } }),
+    ]);
+
+    const totalRevenue = await this.prisma.order.aggregate({
+      where: { paymentStatus: 'COMPLETED' },
+      _sum: { total: true },
+    });
+
     return {
-      totalRevenue: 0,
-      totalTickets: 0,
-      activeDiscounts: 0,
-      newsletterSubscribers: 0,
+      totalRevenue: Number(totalRevenue._sum.total || 0),
+      totalOrders,
+      activeDiscounts,
+      newsletterSubscribers: newsletterCount,
     };
   }
 }

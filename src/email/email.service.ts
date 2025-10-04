@@ -3,8 +3,7 @@ import { SendEmailDto } from './dto/send-email.dto';
 
 @Injectable()
 export class EmailService {
-  send(sendEmailDto: SendEmailDto) {
-    // Implementierung für E-Mail-Versand (z.B. mit nodemailer)
+  async send(sendEmailDto: SendEmailDto) {
     console.log('Sending email to:', sendEmailDto.to);
     console.log('Subject:', sendEmailDto.subject);
 
@@ -14,19 +13,19 @@ export class EmailService {
     };
   }
 
-  sendTicketConfirmation(to: string) {
+  async sendTicketConfirmation(to: string, ticketData: any) {
     return this.send({
       to,
-      subject: 'Ticket Bestätigung - Elbfunkeln',
-      text: `Ihre Tickets wurden erfolgreich gebucht.`,
+      subject: 'Support Ticket Created - Elbfunkeln',
+      text: 'Your support ticket has been created.',
     });
   }
 
-  sendWelcomeEmail(to: string) {
+  async sendWelcomeEmail(to: string) {
     return this.send({
       to,
       subject: 'Willkommen bei Elbfunkeln',
-      text: `Vielen Dank für Ihre Registrierung!`,
+      text: 'Vielen Dank für Ihre Registrierung!',
     });
   }
 }

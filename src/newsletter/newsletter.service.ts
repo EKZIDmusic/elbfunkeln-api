@@ -1,36 +1,48 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { PrismaService } from '../prisma/prisma.service';
 import { SubscribeDto } from './dto/subscribe.dto';
-import { NewsletterSubscriber } from './entities/newsletter-subscriber.entity';
 
 @Injectable()
 export class NewsletterService {
-  constructor(
-    @InjectRepository(NewsletterSubscriber)
-    private subscribersRepository: Repository<NewsletterSubscriber>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async subscribe(subscribeDto: SubscribeDto) {
-    const existing = await this.subscribersRepository.findOne({
+    const existing = await this.prisma.newsletter.findUnique({
       where: { email: subscribeDto.email },
     });
 
     if (existing) {
+      if (!existing.isActive) {
+        return this.prisma.newsletter.update({
+          where: { email: subscribeDto.email },
+          data: { isActive: true },
+        });
+      }
       return { message: 'Already subscribed' };
     }
 
-    const subscriber = this.subscribersRepository.create(subscribeDto);
-    await this.subscribersRepository.save(subscriber);
-    return { message: 'Successfully subscribed' };
+    return this.prisma.newsletter.create({
+      data: subscribeDto,
+    });
   }
 
-  findAll() {
-    return this.subscribersRepository.find({ where: { isActive: true } });
+  async findAll() {
+    return this.prisma.newsletter.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   async unsubscribe(email: string) {
-    await this.subscribersRepository.update({ email }, { isActive: false });
-    return { message: 'Successfully unsubscribed' };
+    return this.prisma.newsletter.update({
+      where: { email },
+      data: { isActive: false },
+    });
+  }
+
+  async remove(id: string) {
+    return this.prisma.newsletter.delete({
+      where: { id },
+    });
   }
 }

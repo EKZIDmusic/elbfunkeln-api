@@ -1,38 +1,57 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
-import { Ticket } from './entities/ticket.entity';
 
 @Injectable()
 export class TicketsService {
-  constructor(
-    @InjectRepository(Ticket)
-    private ticketsRepository: Repository<Ticket>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
-  create(createTicketDto: CreateTicketDto) {
-    const ticket = this.ticketsRepository.create(createTicketDto);
-    return this.ticketsRepository.save(ticket);
+  async create(createTicketDto: CreateTicketDto) {
+    return this.prisma.ticket.create({
+      data: createTicketDto,
+      include: {
+        user: true,
+        messages: true,
+      },
+    });
   }
 
-  findAll(status?: string) {
-    if (status) {
-      return this.ticketsRepository.find({ where: { status } });
-    }
-    return this.ticketsRepository.find();
+  async findAll(status?: string) {
+    return this.prisma.ticket.findMany({
+      where: status ? { status: status as any } : undefined,
+      include: {
+        user: true,
+        messages: {
+          orderBy: { createdAt: 'desc' },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
-  findOne(id: number) {
-    return this.ticketsRepository.findOne({ where: { id } });
+  async findOne(id: string) {
+    return this.prisma.ticket.findUnique({
+      where: { id },
+      include: {
+        user: true,
+        messages: {
+          orderBy: { createdAt: 'asc' },
+        },
+      },
+    });
   }
 
-  update(id: number, updateTicketDto: UpdateTicketDto) {
-    return this.ticketsRepository.update(id, updateTicketDto);
+  async update(id: string, updateTicketDto: UpdateTicketDto) {
+    return this.prisma.ticket.update({
+      where: { id },
+      data: updateTicketDto,
+    });
   }
 
-  remove(id: number) {
-    return this.ticketsRepository.delete(id);
+  async remove(id: string) {
+    return this.prisma.ticket.delete({
+      where: { id },
+    });
   }
 }

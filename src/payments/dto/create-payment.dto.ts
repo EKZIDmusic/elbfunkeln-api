@@ -1,5 +1,6 @@
 export class CreatePaymentDto {
-  orderId!: number;
+  orderId!: string; // UUID
   amount!: number;
   method!: string;
+  transactionId?: string;
 }

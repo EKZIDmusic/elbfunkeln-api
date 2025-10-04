@@ -24,11 +24,11 @@ export class DiscountsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDiscountDto: UpdateDiscountDto) {
-    return this.discountsService.update(+id, updateDiscountDto);
+    return this.discountsService.update(id, updateDiscountDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.discountsService.remove(+id);
+    return this.discountsService.remove(id);
   }
 }

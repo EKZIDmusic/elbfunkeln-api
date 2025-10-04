@@ -1,35 +1,47 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateDiscountDto } from './dto/create-discount.dto';
 import { UpdateDiscountDto } from './dto/update-discount.dto';
-import { Discount } from './entities/discount.entity';
 
 @Injectable()
 export class DiscountsService {
-  constructor(
-    @InjectRepository(Discount)
-    private discountsRepository: Repository<Discount>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
-  create(createDiscountDto: CreateDiscountDto) {
-    const discount = this.discountsRepository.create(createDiscountDto);
-    return this.discountsRepository.save(discount);
+  async create(createDiscountDto: CreateDiscountDto) {
+    return this.prisma.discount.create({
+      data: createDiscountDto,
+    });
   }
 
-  findAll() {
-    return this.discountsRepository.find({ where: { isActive: true } });
+  async findAll() {
+    return this.prisma.discount.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
-  findByCode(code: string) {
-    return this.discountsRepository.findOne({ where: { code, isActive: true } });
+  async findByCode(code: string) {
+    return this.prisma.discount.findUnique({
+      where: { code },
+    });
   }
 
-  update(id: number, updateDiscountDto: UpdateDiscountDto) {
-    return this.discountsRepository.update(id, updateDiscountDto);
+  async findOne(id: string) {
+    return this.prisma.discount.findUnique({
+      where: { id },
+    });
   }
 
-  remove(id: number) {
-    return this.discountsRepository.delete(id);
+  async update(id: string, updateDiscountDto: UpdateDiscountDto) {
+    return this.prisma.discount.update({
+      where: { id },
+      data: updateDiscountDto,
+    });
+  }
+
+  async remove(id: string) {
+    return this.prisma.discount.delete({
+      where: { id },
+    });
   }
 }

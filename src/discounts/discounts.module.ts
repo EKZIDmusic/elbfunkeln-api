@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { DiscountsService } from './discounts.service';
 import { DiscountsController } from './discounts.controller';
-import { Discount } from './entities/discount.entity';
+import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Discount])],
+  imports: [PrismaModule],
   controllers: [DiscountsController],
   providers: [DiscountsService],
   exports: [DiscountsService],

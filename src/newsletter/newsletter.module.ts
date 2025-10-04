@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { NewsletterService } from './newsletter.service';
 import { NewsletterController } from './newsletter.controller';
-import { NewsletterSubscriber } from './entities/newsletter-subscriber.entity';
+import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([NewsletterSubscriber])],
+  imports: [PrismaModule],
   controllers: [NewsletterController],
   providers: [NewsletterService],
   exports: [NewsletterService],

@@ -1,0 +1,91 @@
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateDiscountDto } from './dto/create-discount.dto';
+import { UpdateDiscountDto } from './dto/update-discount.dto';
+export declare class DiscountsService {
+    private prisma;
+    constructor(prisma: PrismaService);
+    create(createDiscountDto: CreateDiscountDto): Promise<{
+        id: string;
+        code: string;
+        description: string | null;
+        type: string;
+        value: import("@prisma/client/runtime/library").Decimal;
+        minAmount: import("@prisma/client/runtime/library").Decimal | null;
+        maxUses: number | null;
+        usedCount: number;
+        isActive: boolean;
+        startsAt: Date | null;
+        expiresAt: Date | null;
+        createdAt: Date;
+    }>;
+    findAll(): Promise<{
+        id: string;
+        code: string;
+        description: string | null;
+        type: string;
+        value: import("@prisma/client/runtime/library").Decimal;
+        minAmount: import("@prisma/client/runtime/library").Decimal | null;
+        maxUses: number | null;
+        usedCount: number;
+        isActive: boolean;
+        startsAt: Date | null;
+        expiresAt: Date | null;
+        createdAt: Date;
+    }[]>;
+    findByCode(code: string): Promise<{
+        id: string;
+        code: string;
+        description: string | null;
+        type: string;
+        value: import("@prisma/client/runtime/library").Decimal;
+        minAmount: import("@prisma/client/runtime/library").Decimal | null;
+        maxUses: number | null;
+        usedCount: number;
+        isActive: boolean;
+        startsAt: Date | null;
+        expiresAt: Date | null;
+        createdAt: Date;
+    }>;
+    findOne(id: string): Promise<{
+        id: string;
+        code: string;
+        description: string | null;
+        type: string;
+        value: import("@prisma/client/runtime/library").Decimal;
+        minAmount: import("@prisma/client/runtime/library").Decimal | null;
+        maxUses: number | null;
+        usedCount: number;
+        isActive: boolean;
+        startsAt: Date | null;
+        expiresAt: Date | null;
+        createdAt: Date;
+    }>;
+    update(id: string, updateDiscountDto: UpdateDiscountDto): Promise<{
+        id: string;
+        code: string;
+        description: string | null;
+        type: string;
+        value: import("@prisma/client/runtime/library").Decimal;
+        minAmount: import("@prisma/client/runtime/library").Decimal | null;
+        maxUses: number | null;
+        usedCount: number;
+        isActive: boolean;
+        startsAt: Date | null;
+        expiresAt: Date | null;
+        createdAt: Date;
+    }>;
+    remove(id: string): Promise<{
+        id: string;
+        code: string;
+        description: string | null;
+        type: string;
+        value: import("@prisma/client/runtime/library").Decimal;
+        minAmount: import("@prisma/client/runtime/library").Decimal | null;
+        maxUses: number | null;
+        usedCount: number;
+        isActive: boolean;
+        startsAt: Date | null;
+        expiresAt: Date | null;
+        createdAt: Date;
+    }>;
+}
