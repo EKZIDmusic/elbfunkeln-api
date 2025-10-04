@@ -2,22 +2,27 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import * as helmet from 'helmet';
-import * as compression from 'compression';
-import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.use(helmet());
-  app.use(compression());
-  app.use(cookieParser());
+  // Security middleware
+  // Note: helmet, compression, cookieParser werden erst nach Installation verwendet
+  // Uncomment when packages are installed:
+  // import helmet from 'helmet';
+  // import compression from 'compression';
+  // import cookieParser from 'cookie-parser';
+  // app.use(helmet());
+  // app.use(compression());
+  // app.use(cookieParser());
 
+  // CORS configuration
   app.enableCors({
     origin: process.env.FRONTEND_URL || 'http://localhost:4200',
     credentials: true,
   });
 
+  // Global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -29,8 +34,10 @@ async function bootstrap() {
     }),
   );
 
+  // API prefix
   app.setGlobalPrefix('api');
 
+  // Swagger documentation
   const config = new DocumentBuilder()
     .setTitle('Elbfunkeln E-Commerce API')
     .setDescription('REST API für Elbfunkeln Drahtschmuck Shop')
@@ -59,4 +66,5 @@ async function bootstrap() {
   console.log(`🚀 Application is running on: http://localhost:${port}`);
   console.log(`📚 API Documentation: http://localhost:${port}/api/docs`);
 }
-bootstrap();
+
+void bootstrap();
