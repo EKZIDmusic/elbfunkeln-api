@@ -3,14 +3,14 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 @Entity('newsletter_subscribers')
 export class NewsletterSubscriber {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ unique: true })
-  email!: string;
+  email: string;
 
   @Column({ default: true })
-  isActive!: boolean;
+  isActive: boolean;
 
   @CreateDateColumn()
-  subscribedAt!: Date;
+  subscribedAt: Date;
 }

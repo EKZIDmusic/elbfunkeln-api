@@ -3,23 +3,23 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 @Entity('payments')
 export class Payment {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column()
-  orderId!: number;
+  orderId: number;
 
   @Column('decimal', { precision: 10, scale: 2 })
-  amount!: number;
+  amount: number;
 
   @Column()
-  method!: string;
+  method: string;
 
   @Column()
-  status!: string;
+  status: string;
 
   @Column({ nullable: true })
-  transactionId!: string;
+  transactionId: string;
 
   @CreateDateColumn()
-  createdAt!: Date;
+  createdAt: Date;
 }

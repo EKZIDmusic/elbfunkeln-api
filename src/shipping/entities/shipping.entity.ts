@@ -1,28 +1,34 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('shipping')
 export class Shipping {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  orderId: number;
+  orderId!: number;
 
   @Column()
-  trackingNumber: string;
+  trackingNumber!: string;
 
   @Column()
-  carrier: string;
+  carrier!: string;
 
   @Column()
-  status: string;
+  status!: string;
 
   @Column('text')
-  address: string;
+  address!: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 }

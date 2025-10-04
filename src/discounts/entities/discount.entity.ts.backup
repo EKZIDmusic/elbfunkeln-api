@@ -1,29 +1,28 @@
-// src/discounts/entities/discount.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity('discounts')
 export class Discount {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ unique: true })
-  code!: string;
+  code: string;
 
   @Column('decimal', { precision: 5, scale: 2 })
-  percentage!: number;
+  percentage: number;
 
   @Column({ default: true })
-  isActive!: boolean;
+  isActive: boolean;
 
   @Column({ nullable: true })
-  expiresAt!: Date;
+  expiresAt: Date;
 
   @Column({ default: 0 })
-  usageLimit!: number;
+  usageLimit: number;
 
   @Column({ default: 0 })
-  usageCount!: number;
+  usageCount: number;
 
   @CreateDateColumn()
-  createdAt!: Date;
+  createdAt: Date;
 }

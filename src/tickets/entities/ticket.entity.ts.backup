@@ -3,29 +3,29 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 @Entity('tickets')
 export class Ticket {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column()
-  ticketNumber!: string;
+  ticketNumber: string;
 
   @Column()
-  userId!: number;
+  userId: number;
 
   @Column()
-  eventDate!: Date;
+  eventDate: Date;
 
   @Column('decimal', { precision: 10, scale: 2 })
-  price!: number;
+  price: number;
 
   @Column({ default: 'valid' })
-  status!: string;
+  status: string;
 
   @Column({ default: false })
-  isUsed!: boolean;
+  isUsed: boolean;
 
   @CreateDateColumn()
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt!: Date;
+  updatedAt: Date;
 }

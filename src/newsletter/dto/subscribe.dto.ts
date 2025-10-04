@@ -1,3 +1,3 @@
 export class SubscribeDto {
-  email: string;
+  email!: string;
 }
