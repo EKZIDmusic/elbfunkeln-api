@@ -52,6 +52,7 @@ export class ShippingService {
       where: { id },
       data: {
         trackingNumber: updateShippingDto.trackingNumber,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         shippingStatus: updateShippingDto.status as any,
       },
     });

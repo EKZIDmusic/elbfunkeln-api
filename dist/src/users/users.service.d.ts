@@ -35,6 +35,7 @@ export declare class UsersService {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            discount: import("@prisma/client/runtime/library").Decimal;
             orderNumber: string;
             userId: string;
             addressId: string;
@@ -44,7 +45,6 @@ export declare class UsersService {
             subtotal: import("@prisma/client/runtime/library").Decimal;
             tax: import("@prisma/client/runtime/library").Decimal;
             shipping: import("@prisma/client/runtime/library").Decimal;
-            discount: import("@prisma/client/runtime/library").Decimal;
             total: import("@prisma/client/runtime/library").Decimal;
             notes: string | null;
             trackingNumber: string | null;

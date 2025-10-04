@@ -6,68 +6,68 @@ export declare class GiftCardsService {
     constructor(prisma: PrismaService);
     create(createGiftCardDto: CreateGiftCardDto): Promise<{
         id: string;
+        createdAt: Date;
+        isActive: boolean;
         code: string;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
-        isActive: boolean;
         expiresAt: Date | null;
-        createdAt: Date;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     findAll(): Promise<{
         id: string;
+        createdAt: Date;
+        isActive: boolean;
         code: string;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
-        isActive: boolean;
         expiresAt: Date | null;
-        createdAt: Date;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }[]>;
     findByCode(code: string): Promise<{
         id: string;
+        createdAt: Date;
+        isActive: boolean;
         code: string;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
-        isActive: boolean;
         expiresAt: Date | null;
-        createdAt: Date;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     findOne(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        isActive: boolean;
         code: string;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
-        isActive: boolean;
         expiresAt: Date | null;
-        createdAt: Date;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     update(id: string, updateGiftCardDto: UpdateGiftCardDto): Promise<{
         id: string;
+        createdAt: Date;
+        isActive: boolean;
         code: string;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
-        isActive: boolean;
         expiresAt: Date | null;
-        createdAt: Date;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     remove(id: string): Promise<{
         id: string;
+        createdAt: Date;
+        isActive: boolean;
         code: string;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
-        isActive: boolean;
         expiresAt: Date | null;
-        createdAt: Date;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
 }

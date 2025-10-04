@@ -1,6 +1,17 @@
+import { IsString, IsNumber, IsOptional, IsDateString } from 'class-validator';
+
 export class CreateGiftCardDto {
+  @IsString()
   code!: string;
-  amount!: number; // Decimal
-  purchasedBy?: string; // UUID of purchaser
+
+  @IsNumber()
+  amount!: number;
+
+  @IsString()
+  @IsOptional()
+  purchasedBy?: string;
+
+  @IsDateString()
+  @IsOptional()
   expiresAt?: Date;
 }

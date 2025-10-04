@@ -3,7 +3,7 @@ import { SendEmailDto } from './dto/send-email.dto';
 
 @Injectable()
 export class EmailService {
-  async send(sendEmailDto: SendEmailDto) {
+  send(sendEmailDto: SendEmailDto) {
     console.log('Sending email to:', sendEmailDto.to);
     console.log('Subject:', sendEmailDto.subject);
 
@@ -13,7 +13,8 @@ export class EmailService {
     };
   }
 
-  async sendTicketConfirmation(to: string, ticketData: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  sendTicketConfirmation(to: string, ticketData: unknown) {
     return this.send({
       to,
       subject: 'Support Ticket Created - Elbfunkeln',
@@ -21,7 +22,7 @@ export class EmailService {
     });
   }
 
-  async sendWelcomeEmail(to: string) {
+  sendWelcomeEmail(to: string) {
     return this.send({
       to,
       subject: 'Willkommen bei Elbfunkeln',

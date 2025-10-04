@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(npx prettier:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

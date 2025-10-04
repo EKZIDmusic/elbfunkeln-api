@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmailService = void 0;
 const common_1 = require("@nestjs/common");
 let EmailService = class EmailService {
-    async send(sendEmailDto) {
+    send(sendEmailDto) {
         console.log('Sending email to:', sendEmailDto.to);
         console.log('Subject:', sendEmailDto.subject);
         return {
@@ -17,14 +17,14 @@ let EmailService = class EmailService {
             message: 'Email sent successfully',
         };
     }
-    async sendTicketConfirmation(to, ticketData) {
+    sendTicketConfirmation(to, ticketData) {
         return this.send({
             to,
             subject: 'Support Ticket Created - Elbfunkeln',
             text: 'Your support ticket has been created.',
         });
     }
-    async sendWelcomeEmail(to) {
+    sendWelcomeEmail(to) {
         return this.send({
             to,
             subject: 'Willkommen bei Elbfunkeln',

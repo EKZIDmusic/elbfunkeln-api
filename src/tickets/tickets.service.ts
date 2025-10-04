@@ -19,6 +19,7 @@ export class TicketsService {
 
   async findAll(status?: string) {
     return this.prisma.ticket.findMany({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       where: status ? { status: status as any } : undefined,
       include: {
         user: true,

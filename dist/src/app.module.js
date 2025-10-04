@@ -12,10 +12,16 @@ const config_1 = require("@nestjs/config");
 const throttler_1 = require("@nestjs/throttler");
 const core_1 = require("@nestjs/core");
 const prisma_module_1 = require("./prisma/prisma.module");
+const auth_module_1 = require("./auth/auth.module");
+const users_module_1 = require("./users/users.module");
 const products_module_1 = require("./products/products.module");
 const categories_module_1 = require("./categories/categories.module");
 const cart_module_1 = require("./cart/cart.module");
 const orders_module_1 = require("./orders/orders.module");
+const addresses_module_1 = require("./addresses/addresses.module");
+const favorites_module_1 = require("./favorites/favorites.module");
+const reviews_module_1 = require("./reviews/reviews.module");
+const gift_cards_module_1 = require("./gift-cards/gift-cards.module");
 const discounts_module_1 = require("./discounts/discounts.module");
 const tickets_module_1 = require("./tickets/tickets.module");
 const newsletter_module_1 = require("./newsletter/newsletter.module");
@@ -40,10 +46,16 @@ exports.AppModule = AppModule = __decorate([
                 },
             ]),
             prisma_module_1.PrismaModule,
+            auth_module_1.AuthModule,
+            users_module_1.UsersModule,
             products_module_1.ProductsModule,
             categories_module_1.CategoriesModule,
             cart_module_1.CartModule,
             orders_module_1.OrdersModule,
+            addresses_module_1.AddressesModule,
+            favorites_module_1.FavoritesModule,
+            reviews_module_1.ReviewsModule,
+            gift_cards_module_1.GiftCardsModule,
             discounts_module_1.DiscountsModule,
             tickets_module_1.TicketsModule,
             newsletter_module_1.NewsletterModule,

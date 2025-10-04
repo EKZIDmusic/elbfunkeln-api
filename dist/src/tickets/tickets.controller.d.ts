@@ -7,8 +7,6 @@ export declare class TicketsController {
     create(createTicketDto: CreateTicketDto): Promise<{
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
@@ -17,29 +15,29 @@ export declare class TicketsController {
             role: import("@prisma/client").$Enums.UserRole;
             isVerified: boolean;
             isBanned: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         };
         messages: {
             id: string;
             createdAt: Date;
-            ticketId: string;
             content: string;
+            ticketId: string;
             isStaff: boolean;
         }[];
     } & {
         id: string;
-        subject: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
-        priority: import("@prisma/client").$Enums.TicketPriority;
-        assignedTo: string | null;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
+        status: import("@prisma/client").$Enums.TicketStatus;
+        subject: string;
+        priority: import("@prisma/client").$Enums.TicketPriority;
+        assignedTo: string | null;
     }>;
     findAll(status?: string): Promise<({
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
@@ -48,29 +46,29 @@ export declare class TicketsController {
             role: import("@prisma/client").$Enums.UserRole;
             isVerified: boolean;
             isBanned: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         };
         messages: {
             id: string;
             createdAt: Date;
-            ticketId: string;
             content: string;
+            ticketId: string;
             isStaff: boolean;
         }[];
     } & {
         id: string;
-        subject: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
-        priority: import("@prisma/client").$Enums.TicketPriority;
-        assignedTo: string | null;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
+        status: import("@prisma/client").$Enums.TicketStatus;
+        subject: string;
+        priority: import("@prisma/client").$Enums.TicketPriority;
+        assignedTo: string | null;
     })[]>;
     findOne(id: string): Promise<{
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
@@ -79,42 +77,44 @@ export declare class TicketsController {
             role: import("@prisma/client").$Enums.UserRole;
             isVerified: boolean;
             isBanned: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         };
         messages: {
             id: string;
             createdAt: Date;
-            ticketId: string;
             content: string;
+            ticketId: string;
             isStaff: boolean;
         }[];
     } & {
         id: string;
-        subject: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
-        priority: import("@prisma/client").$Enums.TicketPriority;
-        assignedTo: string | null;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
+        status: import("@prisma/client").$Enums.TicketStatus;
+        subject: string;
+        priority: import("@prisma/client").$Enums.TicketPriority;
+        assignedTo: string | null;
     }>;
     update(id: string, updateTicketDto: UpdateTicketDto): Promise<{
         id: string;
-        subject: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
-        priority: import("@prisma/client").$Enums.TicketPriority;
-        assignedTo: string | null;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
+        status: import("@prisma/client").$Enums.TicketStatus;
+        subject: string;
+        priority: import("@prisma/client").$Enums.TicketPriority;
+        assignedTo: string | null;
     }>;
     remove(id: string): Promise<{
         id: string;
-        subject: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
-        priority: import("@prisma/client").$Enums.TicketPriority;
-        assignedTo: string | null;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
+        status: import("@prisma/client").$Enums.TicketStatus;
+        subject: string;
+        priority: import("@prisma/client").$Enums.TicketPriority;
+        assignedTo: string | null;
     }>;
 }

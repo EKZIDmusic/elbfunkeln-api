@@ -5,6 +5,9 @@ export declare class PaymentsController {
     constructor(paymentsService: PaymentsService);
     create(createPaymentDto: CreatePaymentDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
         userId: string;
         addressId: string;
@@ -14,17 +17,17 @@ export declare class PaymentsController {
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
         shipping: import("@prisma/client/runtime/library").Decimal;
-        discount: import("@prisma/client/runtime/library").Decimal;
         total: import("@prisma/client/runtime/library").Decimal;
         notes: string | null;
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     findAll(): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
         userId: string;
         addressId: string;
@@ -34,20 +37,15 @@ export declare class PaymentsController {
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
         shipping: import("@prisma/client/runtime/library").Decimal;
-        discount: import("@prisma/client/runtime/library").Decimal;
         total: import("@prisma/client/runtime/library").Decimal;
         notes: string | null;
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
-        createdAt: Date;
-        updatedAt: Date;
     }[]>;
     findOne(id: string): Promise<{
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
@@ -56,6 +54,8 @@ export declare class PaymentsController {
             role: import("@prisma/client").$Enums.UserRole;
             isVerified: boolean;
             isBanned: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         };
         items: ({
             product: {
@@ -63,10 +63,10 @@ export declare class PaymentsController {
                 createdAt: Date;
                 updatedAt: Date;
                 name: string;
-                price: import("@prisma/client/runtime/library").Decimal;
                 description: string;
-                discountPrice: import("@prisma/client/runtime/library").Decimal | null;
                 sku: string;
+                price: import("@prisma/client/runtime/library").Decimal;
+                discountPrice: import("@prisma/client/runtime/library").Decimal | null;
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
@@ -74,13 +74,16 @@ export declare class PaymentsController {
             };
         } & {
             id: string;
-            orderId: string;
+            price: import("@prisma/client/runtime/library").Decimal;
             productId: string;
             quantity: number;
-            price: import("@prisma/client/runtime/library").Decimal;
+            orderId: string;
         })[];
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
         userId: string;
         addressId: string;
@@ -90,13 +93,10 @@ export declare class PaymentsController {
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
         shipping: import("@prisma/client/runtime/library").Decimal;
-        discount: import("@prisma/client/runtime/library").Decimal;
         total: import("@prisma/client/runtime/library").Decimal;
         notes: string | null;
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
 }

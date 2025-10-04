@@ -6,6 +6,9 @@ export declare class ShippingService {
     constructor(prisma: PrismaService);
     create(createShippingDto: CreateShippingDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
         userId: string;
         addressId: string;
@@ -15,20 +18,15 @@ export declare class ShippingService {
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
         shipping: import("@prisma/client/runtime/library").Decimal;
-        discount: import("@prisma/client/runtime/library").Decimal;
         total: import("@prisma/client/runtime/library").Decimal;
         notes: string | null;
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     findAll(): Promise<({
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
@@ -37,13 +35,15 @@ export declare class ShippingService {
             role: import("@prisma/client").$Enums.UserRole;
             isVerified: boolean;
             isBanned: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         };
         address: {
             id: string;
-            userId: string;
-            createdAt: Date;
             firstName: string;
             lastName: string;
+            createdAt: Date;
+            userId: string;
             street: string;
             city: string;
             state: string | null;
@@ -53,6 +53,9 @@ export declare class ShippingService {
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
         userId: string;
         addressId: string;
@@ -62,20 +65,15 @@ export declare class ShippingService {
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
         shipping: import("@prisma/client/runtime/library").Decimal;
-        discount: import("@prisma/client/runtime/library").Decimal;
         total: import("@prisma/client/runtime/library").Decimal;
         notes: string | null;
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
-        createdAt: Date;
-        updatedAt: Date;
     })[]>;
     findOne(id: string): Promise<{
         user: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
@@ -84,13 +82,15 @@ export declare class ShippingService {
             role: import("@prisma/client").$Enums.UserRole;
             isVerified: boolean;
             isBanned: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         };
         address: {
             id: string;
-            userId: string;
-            createdAt: Date;
             firstName: string;
             lastName: string;
+            createdAt: Date;
+            userId: string;
             street: string;
             city: string;
             state: string | null;
@@ -104,10 +104,10 @@ export declare class ShippingService {
                 createdAt: Date;
                 updatedAt: Date;
                 name: string;
-                price: import("@prisma/client/runtime/library").Decimal;
                 description: string;
-                discountPrice: import("@prisma/client/runtime/library").Decimal | null;
                 sku: string;
+                price: import("@prisma/client/runtime/library").Decimal;
+                discountPrice: import("@prisma/client/runtime/library").Decimal | null;
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
@@ -115,13 +115,16 @@ export declare class ShippingService {
             };
         } & {
             id: string;
-            orderId: string;
+            price: import("@prisma/client/runtime/library").Decimal;
             productId: string;
             quantity: number;
-            price: import("@prisma/client/runtime/library").Decimal;
+            orderId: string;
         })[];
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
         userId: string;
         addressId: string;
@@ -131,17 +134,17 @@ export declare class ShippingService {
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
         shipping: import("@prisma/client/runtime/library").Decimal;
-        discount: import("@prisma/client/runtime/library").Decimal;
         total: import("@prisma/client/runtime/library").Decimal;
         notes: string | null;
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     update(id: string, updateShippingDto: UpdateShippingDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
         userId: string;
         addressId: string;
@@ -151,13 +154,10 @@ export declare class ShippingService {
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
         shipping: import("@prisma/client/runtime/library").Decimal;
-        discount: import("@prisma/client/runtime/library").Decimal;
         total: import("@prisma/client/runtime/library").Decimal;
         notes: string | null;
         trackingNumber: string | null;
         stripePaymentId: string | null;
         discountCode: string | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
 }
