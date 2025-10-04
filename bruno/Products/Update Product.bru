@@ -1,0 +1,26 @@
+meta {
+  name: Update Product
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{baseUrl}}/products/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: product-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "name": "Updated Product",
+    "price": 39.99
+  }
+}

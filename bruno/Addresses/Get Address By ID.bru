@@ -1,0 +1,19 @@
+meta {
+  name: Get Address By ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/addresses/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: address-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}

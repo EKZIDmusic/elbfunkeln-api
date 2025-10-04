@@ -1,0 +1,16 @@
+meta {
+  name: Get Sales Data
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/analytics/sales?startDate=2025-01-01&endDate=2025-12-31
+  body: none
+  auth: none
+}
+
+params:query {
+  startDate: 2025-01-01
+  endDate: 2025-12-31
+}

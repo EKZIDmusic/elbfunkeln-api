@@ -1,0 +1,25 @@
+meta {
+  name: Update Gift Card
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/gift-cards/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: gift-card-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "balance": 25.00
+  }
+}

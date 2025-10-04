@@ -1,0 +1,21 @@
+meta {
+  name: Update Discount
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/discounts/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: discount-id-here
+}
+
+body:json {
+  {
+    "percentage": 15
+  }
+}

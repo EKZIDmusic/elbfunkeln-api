@@ -1,0 +1,25 @@
+meta {
+  name: Update Address
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/addresses/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: address-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "street": "Neue Straße 456"
+  }
+}

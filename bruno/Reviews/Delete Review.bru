@@ -1,0 +1,19 @@
+meta {
+  name: Delete Review
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/reviews/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: review-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}

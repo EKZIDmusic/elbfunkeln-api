@@ -1,0 +1,19 @@
+meta {
+  name: Get Order By ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/orders/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: order-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}

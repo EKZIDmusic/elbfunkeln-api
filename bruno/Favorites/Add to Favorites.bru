@@ -1,0 +1,21 @@
+meta {
+  name: Add to Favorites
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/favorites
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "productId": "product-id-here"
+  }
+}

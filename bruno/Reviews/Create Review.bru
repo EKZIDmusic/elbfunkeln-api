@@ -1,0 +1,23 @@
+meta {
+  name: Create Review
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/reviews
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "productId": "product-id-here",
+    "rating": 5,
+    "comment": "Great product!"
+  }
+}

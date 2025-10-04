@@ -1,0 +1,26 @@
+meta {
+  name: Create Product
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/products
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "name": "New Product",
+    "description": "Product description",
+    "price": 29.99,
+    "stock": 100,
+    "categoryId": "category-id-here",
+    "imageUrl": "https://example.com/image.jpg"
+  }
+}

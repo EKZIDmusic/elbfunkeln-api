@@ -1,0 +1,25 @@
+meta {
+  name: Update Cart Item
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/cart/items/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: cart-item-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "quantity": 2
+  }
+}

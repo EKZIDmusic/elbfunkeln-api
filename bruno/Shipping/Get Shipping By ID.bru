@@ -1,0 +1,15 @@
+meta {
+  name: Get Shipping By ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/shipping/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: shipping-id-here
+}

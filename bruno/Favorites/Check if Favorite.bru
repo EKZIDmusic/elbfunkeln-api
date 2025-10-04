@@ -1,0 +1,19 @@
+meta {
+  name: Check if Favorite
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/favorites/:productId/check
+  body: none
+  auth: bearer
+}
+
+params:path {
+  productId: product-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}

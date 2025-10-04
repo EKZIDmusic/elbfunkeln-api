@@ -1,0 +1,26 @@
+meta {
+  name: Update Review
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/reviews/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: review-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "rating": 4,
+    "comment": "Updated review"
+  }
+}

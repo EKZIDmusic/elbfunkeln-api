@@ -1,0 +1,25 @@
+meta {
+  name: [Admin] Update Order Status
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{baseUrl}}/orders/admin/:id/status
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: order-id-here
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "status": "PROCESSING"
+  }
+}

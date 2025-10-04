@@ -1,0 +1,15 @@
+meta {
+  name: Get Review By ID
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/reviews/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: review-id-here
+}

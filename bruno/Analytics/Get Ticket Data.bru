@@ -1,0 +1,16 @@
+meta {
+  name: Get Ticket Data
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/analytics/tickets?startDate=2025-01-01&endDate=2025-12-31
+  body: none
+  auth: none
+}
+
+params:query {
+  startDate: 2025-01-01
+  endDate: 2025-12-31
+}

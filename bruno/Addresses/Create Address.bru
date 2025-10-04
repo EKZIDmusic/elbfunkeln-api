@@ -1,0 +1,25 @@
+meta {
+  name: Create Address
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/addresses
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "street": "Musterstraße 123",
+    "city": "Hamburg",
+    "postalCode": "20095",
+    "country": "Germany",
+    "isDefault": true
+  }
+}
