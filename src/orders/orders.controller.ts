@@ -1,6 +1,4 @@
-import {
-  Controller, Get, Post, Put, Body, Param, Query, UseGuards
-} from '@nestjs/common';
+import { Controller, Get, Post, Put, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -9,6 +7,7 @@ import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { UserRole, OrderStatus } from '@prisma/client';
+import type { UserPayload } from '../common/interfaces/user-payload.interface';
 
 @ApiTags('orders')
 @ApiBearerAuth()

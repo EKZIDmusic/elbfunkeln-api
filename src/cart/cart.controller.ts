@@ -4,6 +4,7 @@ import { CartService } from './cart.service';
 import { AddToCartDto } from './dto/add-to-cart.dto';
 import { UpdateCartItemDto } from './dto/update-cart-item.dto';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
+import type { UserPayload } from '../common/interfaces/user-payload.interface';
 
 @ApiTags('cart')
 @ApiBearerAuth()

@@ -24,7 +24,11 @@ export class ProductsService {
 
   async findAll(page = 1, limit = 20, categoryId?: string, search?: string) {
     const skip = (page - 1) * limit;
-    const where: any = { isActive: true };
+    const where: {
+      isActive: boolean;
+      categoryId?: string;
+      OR?: Array<{ name?: { contains: string }; description?: { contains: string } }>;
+    } = { isActive: true };
 
     if (categoryId) {
       where.categoryId = categoryId;
