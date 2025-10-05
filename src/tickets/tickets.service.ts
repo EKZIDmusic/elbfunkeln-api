@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
+import { CreateMessageDto } from './dto/create-message.dto';
 
 @Injectable()
 export class TicketsService {
@@ -53,6 +54,49 @@ export class TicketsService {
   async remove(id: string) {
     return this.prisma.ticket.delete({
       where: { id },
+    });
+  }
+
+  async addMessage(ticketId: string, createMessageDto: CreateMessageDto) {
+    const ticket = await this.prisma.ticket.findUnique({
+      where: { id: ticketId },
+    });
+
+    if (!ticket) {
+      throw new NotFoundException('Ticket not found');
+    }
+
+    const message = await this.prisma.ticketMessage.create({
+      data: {
+        ticketId,
+        content: createMessageDto.content,
+        isStaff: false,
+      },
+    });
+
+    // Update ticket status to IN_PROGRESS if it was OPEN
+    if (ticket.status === 'OPEN') {
+      await this.prisma.ticket.update({
+        where: { id: ticketId },
+        data: { status: 'IN_PROGRESS' },
+      });
+    }
+
+    return message;
+  }
+
+  async getMessages(ticketId: string) {
+    const ticket = await this.prisma.ticket.findUnique({
+      where: { id: ticketId },
+    });
+
+    if (!ticket) {
+      throw new NotFoundException('Ticket not found');
+    }
+
+    return this.prisma.ticketMessage.findMany({
+      where: { ticketId },
+      orderBy: { createdAt: 'asc' },
     });
   }
 }
