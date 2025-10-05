@@ -23,8 +23,6 @@ export class AuthController {
   }
 
   @Get('profile')
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
   getProfile(@CurrentUser() user: UserPayload) {
     return user;
   }
