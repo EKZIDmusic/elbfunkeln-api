@@ -19,9 +19,20 @@ import { DateRangeQueryDto } from './dto/date-range-query.dto';
 export class AdminAnalyticsController {
   constructor(private readonly adminAnalyticsService: AdminAnalyticsService) {}
 
+  @Get('stats')
+  @ApiOperation({ summary: 'Get dashboard statistics (alias for /dashboard)' })
+  @ApiResponse({ status: 200, description: 'Dashboard stats retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
+  getStats() {
+    return this.adminAnalyticsService.getDashboardStats();
+  }
+
   @Get('dashboard')
   @ApiOperation({ summary: 'Get dashboard statistics' })
   @ApiResponse({ status: 200, description: 'Dashboard stats retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
   getDashboardStats() {
     return this.adminAnalyticsService.getDashboardStats();
   }
@@ -29,6 +40,8 @@ export class AdminAnalyticsController {
   @Get('sales')
   @ApiOperation({ summary: 'Get sales data with date range filter' })
   @ApiResponse({ status: 200, description: 'Sales data retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
   getSalesData(@Query() query: DateRangeQueryDto) {
     return this.adminAnalyticsService.getSalesData(query);
   }
@@ -36,6 +49,8 @@ export class AdminAnalyticsController {
   @Get('customers')
   @ApiOperation({ summary: 'Get customer insights' })
   @ApiResponse({ status: 200, description: 'Customer insights retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
   getCustomerInsights(@Query() query: DateRangeQueryDto) {
     return this.adminAnalyticsService.getCustomerInsights(query);
   }
@@ -43,6 +58,8 @@ export class AdminAnalyticsController {
   @Get('products')
   @ApiOperation({ summary: 'Get product performance data' })
   @ApiResponse({ status: 200, description: 'Product performance retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
   getProductPerformance(@Query() query: DateRangeQueryDto) {
     return this.adminAnalyticsService.getProductPerformance(query);
   }
@@ -50,6 +67,8 @@ export class AdminAnalyticsController {
   @Get('orders')
   @ApiOperation({ summary: 'Get order statistics' })
   @ApiResponse({ status: 200, description: 'Order statistics retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
   getOrderStatistics(@Query() query: DateRangeQueryDto) {
     return this.adminAnalyticsService.getOrderStatistics(query);
   }

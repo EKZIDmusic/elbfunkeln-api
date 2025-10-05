@@ -36,6 +36,8 @@ export class AdminUsersController {
   @Get()
   @ApiOperation({ summary: 'Get all users with filters and pagination' })
   @ApiResponse({ status: 200, description: 'Users retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
   getUsers(@Query() query: UserQueryDto) {
     return this.adminUsersService.getUsers(query);
   }
@@ -44,6 +46,8 @@ export class AdminUsersController {
   @ApiOperation({ summary: 'Get user by ID' })
   @ApiParam({ name: 'id', description: 'User ID' })
   @ApiResponse({ status: 200, description: 'User retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
   @ApiResponse({ status: 404, description: 'User not found' })
   getUserById(@Param('id') id: string) {
     return this.adminUsersService.getUserById(id);
@@ -53,8 +57,10 @@ export class AdminUsersController {
   @ApiOperation({ summary: 'Update user' })
   @ApiParam({ name: 'id', description: 'User ID' })
   @ApiResponse({ status: 200, description: 'User updated successfully' })
-  @ApiResponse({ status: 404, description: 'User not found' })
   @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
+  @ApiResponse({ status: 404, description: 'User not found' })
   updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.adminUsersService.updateUser(id, updateUserDto);
   }
@@ -64,6 +70,8 @@ export class AdminUsersController {
   @ApiOperation({ summary: 'Delete user' })
   @ApiParam({ name: 'id', description: 'User ID' })
   @ApiResponse({ status: 200, description: 'User deleted successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
   @ApiResponse({ status: 404, description: 'User not found' })
   deleteUser(@Param('id') id: string) {
     return this.adminUsersService.deleteUser(id);
@@ -74,6 +82,8 @@ export class AdminUsersController {
   @ApiParam({ name: 'id', description: 'User ID' })
   @ApiQuery({ name: 'activeOnly', required: false, type: Boolean })
   @ApiResponse({ status: 200, description: 'Sessions retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
   @ApiResponse({ status: 404, description: 'User not found' })
   getUserSessions(
     @Param('id') id: string,
@@ -88,6 +98,8 @@ export class AdminUsersController {
   @ApiParam({ name: 'id', description: 'User ID' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({ status: 200, description: 'Session revoked successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
   @ApiResponse({ status: 404, description: 'Session not found' })
   revokeSession(@Param('sessionId') sessionId: string) {
     return this.adminUsersService.revokeSession(sessionId);
@@ -98,6 +110,8 @@ export class AdminUsersController {
   @ApiOperation({ summary: 'Revoke all user sessions' })
   @ApiParam({ name: 'id', description: 'User ID' })
   @ApiResponse({ status: 200, description: 'All sessions revoked successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
   @ApiResponse({ status: 404, description: 'User not found' })
   revokeAllSessions(@Param('id') id: string) {
     return this.adminUsersService.revokeAllUserSessions(id);
@@ -108,6 +122,8 @@ export class AdminUsersController {
   @ApiParam({ name: 'id', description: 'User ID' })
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiResponse({ status: 200, description: 'Activities retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role' })
   @ApiResponse({ status: 404, description: 'User not found' })
   getUserActivities(
     @Param('id') id: string,
