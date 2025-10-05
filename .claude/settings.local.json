@@ -7,7 +7,9 @@
       "Bash(npx prisma generate:*)",
       "Bash(npx eslint:*)",
       "Bash(npm run build:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate API documentation to reflect current implementation status\n\n- Add comprehensive overview with technology stack\n- Document all 110+ API endpoints across 21 modules\n- Include new features: Users, Addresses, Favorites, Reviews\n- Add complete admin endpoints (Analytics, Users, Contact, Orders)\n- Document Tickets, Payments, Discounts, Shipping modules\n- Add API overview grouped by access level (Public, Customer, Admin)\n- Include development guidelines and security features\n- Add all new enums (UserStatus, TicketStatus, ContactStatus)\n- Update with environment variables and configuration details\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
