@@ -12,11 +12,11 @@ async function main() {
     where: { email: 'admin@elbfunkeln.de' },
     update: {},
     create: {
-      email: 'admin@elbfunkeln.de',
+      email: 'owner@elbfunkeln.de',
       password: hashedPassword,
-      firstName: 'Admin',
-      lastName: 'User',
-      role: 'ADMIN',
+      firstName: 'Shop',
+      lastName: 'Owner',
+      role: 'SHOP_OWNER',
       isVerified: true,
     },
   });
@@ -44,7 +44,7 @@ async function main() {
     create: {
       name: 'Ringe',
       slug: 'ringe',
-      description: 'Handgefertigte Drahtringe in verschiedenen Designs und Größen'
+      description: 'Handgefertigte Drahtringe in verschiedenen Designs und Größen',
     },
   });
 
@@ -54,7 +54,7 @@ async function main() {
     create: {
       name: 'Ohrringe',
       slug: 'ohrringe',
-      description: 'Elegante Drahtohrringe für jeden Anlass'
+      description: 'Elegante Drahtohrringe für jeden Anlass',
     },
   });
 
@@ -64,7 +64,7 @@ async function main() {
     create: {
       name: 'Ketten',
       slug: 'ketten',
-      description: 'Filigrane Drahtketten und Anhänger'
+      description: 'Filigrane Drahtketten und Anhänger',
     },
   });
 
@@ -74,7 +74,7 @@ async function main() {
     create: {
       name: 'Armbänder',
       slug: 'armbänder',
-      description: 'Handgefertigte Drahtarmbänder'
+      description: 'Handgefertigte Drahtarmbänder',
     },
   });
 
@@ -86,7 +86,8 @@ async function main() {
     update: {},
     create: {
       name: 'Drahtring Silber Klassisch',
-      description: 'Handgefertigter Ring aus hochwertigem Silberdraht. Jedes Stück ist ein Unikat mit einzigartiger Wicklung.',
+      description:
+        'Handgefertigter Ring aus hochwertigem Silberdraht. Jedes Stück ist ein Unikat mit einzigartiger Wicklung.',
       price: 49.99,
       sku: 'RING-SILVER-001',
       stock: 10,
@@ -97,8 +98,17 @@ async function main() {
 
   await prisma.productImage.createMany({
     data: [
-      { productId: silverRing.id, url: '/images/products/ring-silver-1.jpg', alt: 'Silberring Vorderansicht', isPrimary: true },
-      { productId: silverRing.id, url: '/images/products/ring-silver-2.jpg', alt: 'Silberring Seitenansicht' },
+      {
+        productId: silverRing.id,
+        url: '/images/products/ring-silver-1.jpg',
+        alt: 'Silberring Vorderansicht',
+        isPrimary: true,
+      },
+      {
+        productId: silverRing.id,
+        url: '/images/products/ring-silver-2.jpg',
+        alt: 'Silberring Seitenansicht',
+      },
     ],
     skipDuplicates: true,
   });
@@ -108,7 +118,8 @@ async function main() {
     update: {},
     create: {
       name: 'Drahtohrringe Gold Spirale',
-      description: 'Elegante Ohrringe aus vergoldetem Draht in Spiralform. Leicht und komfortabel zu tragen.',
+      description:
+        'Elegante Ohrringe aus vergoldetem Draht in Spiralform. Leicht und komfortabel zu tragen.',
       price: 59.99,
       discountPrice: 49.99,
       sku: 'EARR-GOLD-001',
@@ -120,7 +131,12 @@ async function main() {
 
   await prisma.productImage.createMany({
     data: [
-      { productId: goldEarrings.id, url: '/images/products/earrings-gold-1.jpg', alt: 'Goldene Ohrringe', isPrimary: true },
+      {
+        productId: goldEarrings.id,
+        url: '/images/products/earrings-gold-1.jpg',
+        alt: 'Goldene Ohrringe',
+        isPrimary: true,
+      },
     ],
     skipDuplicates: true,
   });
@@ -242,9 +258,9 @@ async function main() {
       paymentStatus: 'COMPLETED',
       shippingStatus: 'DELIVERED',
       subtotal: 49.99,
-      tax: 9.50,
+      tax: 9.5,
       shipping: 4.99,
-      discount: 5.00,
+      discount: 5.0,
       total: 59.48,
       discountCode: 'WELCOME10',
       items: {
@@ -320,7 +336,8 @@ async function main() {
             isStaff: false,
           },
           {
-            content: 'Hallo! Die Lieferung dauert in der Regel 3-5 Werktage innerhalb Deutschlands.',
+            content:
+              'Hallo! Die Lieferung dauert in der Regel 3-5 Werktage innerhalb Deutschlands.',
             isStaff: true,
           },
         ],
