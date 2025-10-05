@@ -34,6 +34,7 @@ export declare class FavoritesController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -81,6 +82,7 @@ export declare class FavoritesController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {

@@ -28,6 +28,21 @@ let JwtAuthGuard = class JwtAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
             return true;
         return super.canActivate(context);
     }
+    handleRequest(err, user, info) {
+        if (err || !user) {
+            if (info?.name === 'TokenExpiredError') {
+                throw new common_1.UnauthorizedException('Token expired');
+            }
+            if (info?.name === 'JsonWebTokenError') {
+                throw new common_1.UnauthorizedException('Invalid token');
+            }
+            if (info?.message === 'No auth token') {
+                throw new common_1.UnauthorizedException('No authentication token provided');
+            }
+            throw err || new common_1.UnauthorizedException('Authentication required');
+        }
+        return user;
+    }
 };
 exports.JwtAuthGuard = JwtAuthGuard;
 exports.JwtAuthGuard = JwtAuthGuard = __decorate([

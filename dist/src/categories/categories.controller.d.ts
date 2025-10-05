@@ -62,6 +62,7 @@ export declare class CategoriesController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         })[];
     } & {

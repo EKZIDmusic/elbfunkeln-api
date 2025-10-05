@@ -87,6 +87,7 @@ export declare class CategoriesService {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         })[];
     } & {

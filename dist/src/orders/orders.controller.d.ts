@@ -46,6 +46,7 @@ export declare class OrdersController {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {
@@ -111,6 +112,7 @@ export declare class OrdersController {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {
@@ -182,6 +184,7 @@ export declare class OrdersController {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {
@@ -252,6 +255,7 @@ export declare class OrdersController {
                     stock: number;
                     isActive: boolean;
                     isFeatured: boolean;
+                    giftboxavailable: boolean;
                     categoryId: string;
                 };
             } & {
@@ -315,6 +319,7 @@ export declare class OrdersController {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {

@@ -33,6 +33,7 @@ export declare class ProductsService {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
     findAll(page?: number, limit?: number, categoryId?: string, search?: string): Promise<{
@@ -65,6 +66,7 @@ export declare class ProductsService {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         })[];
         meta: {
@@ -103,6 +105,7 @@ export declare class ProductsService {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
     findFeatured(): Promise<({
@@ -134,6 +137,7 @@ export declare class ProductsService {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     })[]>;
     search(query: string): Promise<({
@@ -165,6 +169,7 @@ export declare class ProductsService {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     })[]>;
     update(id: string, updateProductDto: UpdateProductDto): Promise<{
@@ -196,6 +201,7 @@ export declare class ProductsService {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
     remove(id: string): Promise<{
@@ -210,6 +216,7 @@ export declare class ProductsService {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
 }

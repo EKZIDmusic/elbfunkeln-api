@@ -23,6 +23,7 @@ export declare class ReviewsController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -70,6 +71,7 @@ export declare class ReviewsController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -110,6 +112,7 @@ export declare class ReviewsController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -139,6 +142,7 @@ export declare class ReviewsController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {

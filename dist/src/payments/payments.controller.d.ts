@@ -70,6 +70,7 @@ export declare class PaymentsController {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {

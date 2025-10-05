@@ -22,6 +22,7 @@ export declare class ReviewsService {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -51,6 +52,7 @@ export declare class ReviewsService {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -99,6 +101,7 @@ export declare class ReviewsService {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -128,6 +131,7 @@ export declare class ReviewsService {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {
@@ -157,6 +161,7 @@ export declare class ReviewsService {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         };
     } & {

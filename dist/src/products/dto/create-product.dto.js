@@ -23,6 +23,7 @@ class CreateProductDto {
     categoryId;
     isActive;
     isFeatured;
+    giftboxavailable;
 }
 exports.CreateProductDto = CreateProductDto;
 __decorate([
@@ -79,4 +80,10 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateProductDto.prototype, "isFeatured", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false, default: false }),
+    (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], CreateProductDto.prototype, "giftboxavailable", void 0);
 //# sourceMappingURL=create-product.dto.js.map

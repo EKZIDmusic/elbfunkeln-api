@@ -44,6 +44,7 @@ export declare class OrdersService {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {
@@ -94,6 +95,7 @@ export declare class OrdersService {
                     stock: number;
                     isActive: boolean;
                     isFeatured: boolean;
+                    giftboxavailable: boolean;
                     categoryId: string;
                 };
             } & {
@@ -172,6 +174,7 @@ export declare class OrdersService {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {
@@ -237,6 +240,7 @@ export declare class OrdersService {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {
@@ -293,6 +297,7 @@ export declare class OrdersService {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {

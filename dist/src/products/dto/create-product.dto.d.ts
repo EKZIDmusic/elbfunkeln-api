@@ -8,4 +8,5 @@ export declare class CreateProductDto {
     categoryId: string;
     isActive?: boolean;
     isFeatured?: boolean;
+    giftboxavailable?: boolean;
 }

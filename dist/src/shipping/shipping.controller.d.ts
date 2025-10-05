@@ -111,6 +111,7 @@ export declare class ShippingController {
                 stock: number;
                 isActive: boolean;
                 isFeatured: boolean;
+                giftboxavailable: boolean;
                 categoryId: string;
             };
         } & {

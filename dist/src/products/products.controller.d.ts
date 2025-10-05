@@ -34,6 +34,7 @@ export declare class ProductsController {
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
+            giftboxavailable: boolean;
             categoryId: string;
         })[];
         meta: {
@@ -72,6 +73,7 @@ export declare class ProductsController {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     })[]>;
     search(query: string): Promise<({
@@ -103,6 +105,7 @@ export declare class ProductsController {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     })[]>;
     findOne(id: string): Promise<{
@@ -134,6 +137,7 @@ export declare class ProductsController {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
     create(createProductDto: CreateProductDto): Promise<{
@@ -165,6 +169,7 @@ export declare class ProductsController {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
     update(id: string, updateProductDto: UpdateProductDto): Promise<{
@@ -196,6 +201,7 @@ export declare class ProductsController {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
     remove(id: string): Promise<{
@@ -210,6 +216,7 @@ export declare class ProductsController {
         stock: number;
         isActive: boolean;
         isFeatured: boolean;
+        giftboxavailable: boolean;
         categoryId: string;
     }>;
 }
