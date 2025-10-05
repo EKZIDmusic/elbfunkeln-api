@@ -20,6 +20,8 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { PaymentsModule } from './payments/payments.module';
 import { ShippingModule } from './shipping/shipping.module';
 import { EmailModule } from './email/email.module';
+import { AdminModule } from './admin/admin.module';
+import { ContactModule } from './contact/contact.module';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 
 @Module({
@@ -51,6 +53,8 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
     PaymentsModule,
     ShippingModule,
     EmailModule,
+    AdminModule,
+    ContactModule,
   ],
   providers: [
     {

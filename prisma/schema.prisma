@@ -54,25 +54,44 @@ enum ShippingStatus {
   FAILED
 }
 
-model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  password   String
-  firstName  String?
-  lastName   String?
-  phone      String?
-  role       UserRole @default(CUSTOMER)
-  isVerified Boolean  @default(false)
-  isBanned   Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+enum UserStatus {
+  active
+  inactive
+  banned
+}
 
-  orders    Order[]
-  addresses Address[]
-  favorites Favorite[]
-  tickets   Ticket[]
-  cart      Cart?
-  reviews   Review[]
+enum ContactStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model User {
+  id               String     @id @default(uuid())
+  email            String     @unique
+  password         String
+  firstName        String?
+  lastName         String?
+  displayName      String?
+  phone            String?
+  role             UserRole   @default(CUSTOMER)
+  status           UserStatus @default(active)
+  isVerified       Boolean    @default(false)
+  isBanned         Boolean    @default(false)
+  twoFactorEnabled Boolean    @default(false)
+  lastLogin        DateTime?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  orders     Order[]
+  addresses  Address[]
+  favorites  Favorite[]
+  tickets    Ticket[]
+  cart       Cart?
+  reviews    Review[]
+  sessions   UserSession[]
+  activities UserActivity[]
 
   @@map("users")
 }
@@ -322,4 +341,54 @@ model Analytics {
   createdAt DateTime @default(now())
 
   @@map("analytics")
+}
+
+model UserSession {
+  id          String   @id @default(uuid())
+  userId      String
+  deviceName  String?
+  deviceType  String?
+  browserName String?
+  ipAddress   String?
+  userAgent   String?  @db.Text
+  isActive    Boolean  @default(true)
+  lastUsedAt  DateTime @default(now())
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("user_sessions")
+}
+
+model UserActivity {
+  id          String   @id @default(uuid())
+  userId      String
+  actionType  String
+  description String?
+  ipAddress   String?
+  userAgent   String?  @db.Text
+  success     Boolean  @default(true)
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("user_activities")
+}
+
+model ContactInquiry {
+  id        String        @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String        @db.Text
+  status    ContactStatus @default(NEW)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([status, createdAt])
+  @@map("contact_inquiries")
 }
