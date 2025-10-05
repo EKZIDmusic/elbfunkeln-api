@@ -13,10 +13,14 @@ export declare class OrdersController {
             password: string;
             firstName: string | null;
             lastName: string | null;
+            displayName: string | null;
             phone: string | null;
             role: import("@prisma/client").$Enums.UserRole;
+            status: import("@prisma/client").$Enums.UserStatus;
             isVerified: boolean;
             isBanned: boolean;
+            twoFactorEnabled: boolean;
+            lastLogin: Date | null;
             createdAt: Date;
             updatedAt: Date;
         };
@@ -58,12 +62,12 @@ export declare class OrdersController {
         })[];
     } & {
         id: string;
+        status: import("@prisma/client").$Enums.OrderStatus;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
         subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -124,12 +128,12 @@ export declare class OrdersController {
         })[];
     } & {
         id: string;
+        status: import("@prisma/client").$Enums.OrderStatus;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
         subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -196,12 +200,12 @@ export declare class OrdersController {
         })[];
     } & {
         id: string;
+        status: import("@prisma/client").$Enums.OrderStatus;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
         subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -216,12 +220,12 @@ export declare class OrdersController {
     }>;
     cancel(id: string, user: UserPayload): Promise<{
         id: string;
+        status: import("@prisma/client").$Enums.OrderStatus;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
         subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -267,12 +271,12 @@ export declare class OrdersController {
             })[];
         } & {
             id: string;
+            status: import("@prisma/client").$Enums.OrderStatus;
             createdAt: Date;
             updatedAt: Date;
             userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
             orderNumber: string;
-            status: import("@prisma/client").$Enums.OrderStatus;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
             subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -299,10 +303,14 @@ export declare class OrdersController {
             password: string;
             firstName: string | null;
             lastName: string | null;
+            displayName: string | null;
             phone: string | null;
             role: import("@prisma/client").$Enums.UserRole;
+            status: import("@prisma/client").$Enums.UserStatus;
             isVerified: boolean;
             isBanned: boolean;
+            twoFactorEnabled: boolean;
+            lastLogin: Date | null;
             createdAt: Date;
             updatedAt: Date;
         };
@@ -331,12 +339,12 @@ export declare class OrdersController {
         })[];
     } & {
         id: string;
+        status: import("@prisma/client").$Enums.OrderStatus;
         createdAt: Date;
         updatedAt: Date;
         userId: string;
         discount: import("@prisma/client/runtime/library").Decimal;
         orderNumber: string;
-        status: import("@prisma/client").$Enums.OrderStatus;
         paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
         shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
         subtotal: import("@prisma/client/runtime/library").Decimal;

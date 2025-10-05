@@ -11,12 +11,12 @@ export declare class AnalyticsController {
         };
         data: {
             id: string;
+            status: import("@prisma/client").$Enums.OrderStatus;
             createdAt: Date;
             updatedAt: Date;
             userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
             orderNumber: string;
-            status: import("@prisma/client").$Enums.OrderStatus;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
             subtotal: import("@prisma/client/runtime/library").Decimal;

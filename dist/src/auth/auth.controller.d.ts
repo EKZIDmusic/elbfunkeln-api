@@ -10,10 +10,14 @@ export declare class AuthController {
         email: string;
         firstName: string | null;
         lastName: string | null;
+        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
+        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
+        twoFactorEnabled: boolean;
+        lastLogin: Date | null;
         createdAt: Date;
         updatedAt: Date;
     }>;

@@ -219,14 +219,14 @@ export class AdminAnalyticsService {
           name: product?.name || 'Unknown',
           sku: product?.sku || 'N/A',
           unitsSold: stat._sum.quantity || 0,
-          revenue: stat._sum.price || 0,
+          revenue: Number(stat._sum.price || 0),
           orders: stat._count.productId,
           currentStock: product?.stock || 0,
         };
       }),
     );
 
-    return enrichedProducts.sort((a, b) => b.revenue - a.revenue);
+    return enrichedProducts.sort((a, b) => Number(b.revenue) - Number(a.revenue));
   }
 
   async getOrderStatistics(query: DateRangeQueryDto) {
