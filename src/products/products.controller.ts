@@ -54,7 +54,7 @@ export class ProductsController {
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.SHOP_OWNER)
-  @Post()
+  @Post('products')
   @ApiOperation({ summary: 'Create product (Admin/Shop Owner)' })
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
