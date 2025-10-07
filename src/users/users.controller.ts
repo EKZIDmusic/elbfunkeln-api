@@ -41,14 +41,14 @@ export class AccountSettingsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get account settings by user ID' })
-  getAccountSettings(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+  getAccountSettings(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update account settings by user ID' })
   updateAccountSettings(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.usersService.update(id, updateUserDto);

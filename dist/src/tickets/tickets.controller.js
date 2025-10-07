@@ -14,9 +14,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TicketsController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const tickets_service_1 = require("./tickets.service");
 const create_ticket_dto_1 = require("./dto/create-ticket.dto");
 const update_ticket_dto_1 = require("./dto/update-ticket.dto");
+const create_message_dto_1 = require("./dto/create-message.dto");
+const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
+const roles_guard_1 = require("../common/guards/roles.guard");
+const roles_decorator_1 = require("../common/decorators/roles.decorator");
+const client_1 = require("@prisma/client");
 let TicketsController = class TicketsController {
     ticketsService;
     constructor(ticketsService) {
@@ -37,6 +43,12 @@ let TicketsController = class TicketsController {
     remove(id) {
         return this.ticketsService.remove(id);
     }
+    addMessage(id, createMessageDto) {
+        return this.ticketsService.addMessage(id, createMessageDto);
+    }
+    getMessages(id) {
+        return this.ticketsService.getMessages(id);
+    }
 };
 exports.TicketsController = TicketsController;
 __decorate([
@@ -48,6 +60,7 @@ __decorate([
 ], TicketsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN),
     __param(0, (0, common_1.Query)('status')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -70,12 +83,31 @@ __decorate([
 ], TicketsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], TicketsController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)(':id/messages'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, create_message_dto_1.CreateMessageDto]),
+    __metadata("design:returntype", void 0)
+], TicketsController.prototype, "addMessage", null);
+__decorate([
+    (0, common_1.Get)(':id/messages'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TicketsController.prototype, "getMessages", null);
 exports.TicketsController = TicketsController = __decorate([
+    (0, swagger_1.ApiTags)('tickets'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Controller)('tickets'),
     __metadata("design:paramtypes", [tickets_service_1.TicketsService])
 ], TicketsController);

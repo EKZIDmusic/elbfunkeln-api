@@ -24,6 +24,12 @@ let ProductsService = class ProductsService {
         if (existingSku) {
             throw new common_1.BadRequestException('SKU already exists');
         }
+        const category = await this.prisma.category.findUnique({
+            where: { id: createProductDto.categoryId },
+        });
+        if (!category) {
+            throw new common_1.NotFoundException(`Kategorie mit ID ${createProductDto.categoryId} nicht gefunden`);
+        }
         return this.prisma.product.create({
             data: createProductDto,
             include: { category: true, images: true },
@@ -106,6 +112,14 @@ let ProductsService = class ProductsService {
     }
     async update(id, updateProductDto) {
         await this.findOne(id);
+        if (updateProductDto.categoryId) {
+            const category = await this.prisma.category.findUnique({
+                where: { id: updateProductDto.categoryId },
+            });
+            if (!category) {
+                throw new common_1.NotFoundException(`Kategorie mit ID ${updateProductDto.categoryId} nicht gefunden`);
+            }
+        }
         return this.prisma.product.update({
             where: { id },
             data: updateProductDto,

@@ -1,27 +1,34 @@
+import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 export declare class PaymentsService {
     private prisma;
-    constructor(prisma: PrismaService);
+    private configService;
+    private stripe;
+    constructor(prisma: PrismaService, configService: ConfigService);
     create(createPaymentDto: CreatePaymentDto): Promise<{
-        id: string;
-        status: import("@prisma/client").$Enums.OrderStatus;
-        createdAt: Date;
-        updatedAt: Date;
-        userId: string;
-        discount: import("@prisma/client/runtime/library").Decimal;
-        orderNumber: string;
-        paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
-        shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
-        subtotal: import("@prisma/client/runtime/library").Decimal;
-        tax: import("@prisma/client/runtime/library").Decimal;
-        shipping: import("@prisma/client/runtime/library").Decimal;
-        total: import("@prisma/client/runtime/library").Decimal;
-        notes: string | null;
-        trackingNumber: string | null;
-        stripePaymentId: string | null;
-        discountCode: string | null;
-        addressId: string;
+        order: {
+            id: string;
+            status: import("@prisma/client").$Enums.OrderStatus;
+            createdAt: Date;
+            updatedAt: Date;
+            userId: string;
+            discount: import("@prisma/client/runtime/library").Decimal;
+            orderNumber: string;
+            paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
+            shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
+            subtotal: import("@prisma/client/runtime/library").Decimal;
+            tax: import("@prisma/client/runtime/library").Decimal;
+            shipping: import("@prisma/client/runtime/library").Decimal;
+            total: import("@prisma/client/runtime/library").Decimal;
+            notes: string | null;
+            trackingNumber: string | null;
+            stripePaymentId: string | null;
+            discountCode: string | null;
+            addressId: string;
+        };
+        clientSecret: string;
+        paymentIntentId: string;
     }>;
     findAll(): Promise<{
         id: string;
@@ -104,4 +111,10 @@ export declare class PaymentsService {
         discountCode: string | null;
         addressId: string;
     }>;
+    handleWebhook(rawBody: Buffer, signature: string): Promise<{
+        received: boolean;
+    }>;
+    private handlePaymentSuccess;
+    private handlePaymentFailed;
+    private handleRefund;
 }

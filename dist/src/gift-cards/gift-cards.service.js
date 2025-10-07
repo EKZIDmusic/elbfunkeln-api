@@ -61,6 +61,83 @@ let GiftCardsService = class GiftCardsService {
             where: { id },
         });
     }
+    async redeem(redeemGiftCardDto) {
+        const giftCard = await this.prisma.giftCard.findUnique({
+            where: { code: redeemGiftCardDto.code },
+        });
+        if (!giftCard) {
+            throw new common_1.NotFoundException('Gift card not found');
+        }
+        if (!giftCard.isActive) {
+            throw new common_1.BadRequestException('Gift card is not active');
+        }
+        if (giftCard.expiresAt && new Date(giftCard.expiresAt) < new Date()) {
+            throw new common_1.BadRequestException('Gift card has expired');
+        }
+        const currentBalance = Number(giftCard.balance);
+        if (currentBalance < redeemGiftCardDto.amount) {
+            throw new common_1.BadRequestException('Insufficient gift card balance');
+        }
+        const order = await this.prisma.order.findUnique({
+            where: { id: redeemGiftCardDto.orderId },
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                    },
+                },
+            },
+        });
+        if (!order) {
+            throw new common_1.NotFoundException('Order not found');
+        }
+        const orderTotal = order.items.reduce((sum, item) => {
+            return sum + item.quantity * Number(item.price);
+        }, 0);
+        const redemptionAmount = Math.min(redeemGiftCardDto.amount, orderTotal);
+        const updatedGiftCard = await this.prisma.giftCard.update({
+            where: { id: giftCard.id },
+            data: {
+                balance: {
+                    decrement: redemptionAmount,
+                },
+            },
+        });
+        const currentTotal = Number(order.total);
+        const updatedOrder = await this.prisma.order.update({
+            where: { id: redeemGiftCardDto.orderId },
+            data: {
+                total: currentTotal - redemptionAmount,
+            },
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                    },
+                },
+            },
+        });
+        return {
+            order: updatedOrder,
+            giftCard: updatedGiftCard,
+            redeemedAmount: redemptionAmount,
+            remainingBalance: updatedGiftCard.balance,
+        };
+    }
+    async checkBalance(code) {
+        const giftCard = await this.prisma.giftCard.findUnique({
+            where: { code },
+        });
+        if (!giftCard) {
+            throw new common_1.NotFoundException('Gift card not found');
+        }
+        return {
+            code: giftCard.code,
+            balance: giftCard.balance,
+            isActive: giftCard.isActive,
+            expiresAt: giftCard.expiresAt,
+        };
+    }
 };
 exports.GiftCardsService = GiftCardsService;
 exports.GiftCardsService = GiftCardsService = __decorate([

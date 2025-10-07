@@ -14,8 +14,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaymentsController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const payments_service_1 = require("./payments.service");
 const create_payment_dto_1 = require("./dto/create-payment.dto");
+const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
+const public_decorator_1 = require("../common/decorators/public.decorator");
 let PaymentsController = class PaymentsController {
     paymentsService;
     constructor(paymentsService) {
@@ -30,10 +33,15 @@ let PaymentsController = class PaymentsController {
     findOne(id) {
         return this.paymentsService.findOne(id);
     }
+    async handleWebhook(signature, request) {
+        return this.paymentsService.handleWebhook(request.rawBody, signature);
+    }
 };
 exports.PaymentsController = PaymentsController;
 __decorate([
     (0, common_1.Post)(),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_payment_dto_1.CreatePaymentDto]),
@@ -41,18 +49,32 @@ __decorate([
 ], PaymentsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], PaymentsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], PaymentsController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Post)('webhook'),
+    (0, public_decorator_1.Public)(),
+    __param(0, (0, common_1.Headers)('stripe-signature')),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], PaymentsController.prototype, "handleWebhook", null);
 exports.PaymentsController = PaymentsController = __decorate([
+    (0, swagger_1.ApiTags)('payments'),
     (0, common_1.Controller)('payments'),
     __metadata("design:paramtypes", [payments_service_1.PaymentsService])
 ], PaymentsController);

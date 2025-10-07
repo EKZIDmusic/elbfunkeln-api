@@ -1,8 +1,12 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { SubscribeDto } from './dto/subscribe.dto';
+import { SendNewsletterDto } from './dto/send-newsletter.dto';
+import { EmailService } from '../email/email.service';
 export declare class NewsletterService {
     private prisma;
-    constructor(prisma: PrismaService);
+    private emailService;
+    private readonly logger;
+    constructor(prisma: PrismaService, emailService: EmailService);
     subscribe(subscribeDto: SubscribeDto): Promise<{
         id: string;
         email: string;
@@ -32,5 +36,11 @@ export declare class NewsletterService {
         createdAt: Date;
         isActive: boolean;
         preferences: import("@prisma/client/runtime/library").JsonValue | null;
+    }>;
+    sendNewsletter(sendNewsletterDto: SendNewsletterDto): Promise<{
+        total: number;
+        sent: number;
+        failed: number;
+        errors: string[];
     }>;
 }

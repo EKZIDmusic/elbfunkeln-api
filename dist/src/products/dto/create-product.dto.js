@@ -65,7 +65,7 @@ __decorate([
 ], CreateProductDto.prototype, "stock", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, class_validator_1.IsUUID)('4', { message: 'categoryId muss eine gültige UUID sein' }),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "categoryId", void 0);
 __decorate([

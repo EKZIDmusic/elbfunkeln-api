@@ -69,46 +69,35 @@ let AdminUsersService = class AdminUsersService {
         if (status) {
             where.status = status;
         }
-        const [users, total] = await Promise.all([
-            this.prisma.user.findMany({
-                where,
-                skip,
-                take: limit,
-                orderBy: { [sortBy]: sortOrder },
-                select: {
-                    id: true,
-                    email: true,
-                    firstName: true,
-                    lastName: true,
-                    displayName: true,
-                    phone: true,
-                    role: true,
-                    status: true,
-                    isVerified: true,
-                    isBanned: true,
-                    twoFactorEnabled: true,
-                    lastLogin: true,
-                    createdAt: true,
-                    updatedAt: true,
-                    _count: {
-                        select: {
-                            orders: true,
-                            sessions: true,
-                        },
+        const users = await this.prisma.user.findMany({
+            where,
+            skip,
+            take: limit,
+            orderBy: { [sortBy]: sortOrder },
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                displayName: true,
+                phone: true,
+                role: true,
+                status: true,
+                isVerified: true,
+                isBanned: true,
+                twoFactorEnabled: true,
+                lastLogin: true,
+                createdAt: true,
+                updatedAt: true,
+                _count: {
+                    select: {
+                        orders: true,
+                        sessions: true,
                     },
                 },
-            }),
-            this.prisma.user.count({ where }),
-        ]);
-        return {
-            data: users,
-            meta: {
-                total,
-                page,
-                limit,
-                totalPages: Math.ceil(total / limit),
             },
-        };
+        });
+        return users;
     }
     async getUserById(id) {
         const user = await this.prisma.user.findUnique({

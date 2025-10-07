@@ -60,6 +60,40 @@ let TicketsService = class TicketsService {
             where: { id },
         });
     }
+    async addMessage(ticketId, createMessageDto) {
+        const ticket = await this.prisma.ticket.findUnique({
+            where: { id: ticketId },
+        });
+        if (!ticket) {
+            throw new common_1.NotFoundException('Ticket not found');
+        }
+        const message = await this.prisma.ticketMessage.create({
+            data: {
+                ticketId,
+                content: createMessageDto.content,
+                isStaff: false,
+            },
+        });
+        if (ticket.status === 'OPEN') {
+            await this.prisma.ticket.update({
+                where: { id: ticketId },
+                data: { status: 'IN_PROGRESS' },
+            });
+        }
+        return message;
+    }
+    async getMessages(ticketId) {
+        const ticket = await this.prisma.ticket.findUnique({
+            where: { id: ticketId },
+        });
+        if (!ticket) {
+            throw new common_1.NotFoundException('Ticket not found');
+        }
+        return this.prisma.ticketMessage.findMany({
+            where: { ticketId },
+            orderBy: { createdAt: 'asc' },
+        });
+    }
 };
 exports.TicketsService = TicketsService;
 exports.TicketsService = TicketsService = __decorate([

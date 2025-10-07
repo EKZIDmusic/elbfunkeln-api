@@ -1,6 +1,7 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
+import { CreateMessageDto } from './dto/create-message.dto';
 export declare class TicketsService {
     private prisma;
     constructor(prisma: PrismaService);
@@ -129,4 +130,18 @@ export declare class TicketsService {
         priority: import("@prisma/client").$Enums.TicketPriority;
         assignedTo: string | null;
     }>;
+    addMessage(ticketId: string, createMessageDto: CreateMessageDto): Promise<{
+        id: string;
+        createdAt: Date;
+        content: string;
+        isStaff: boolean;
+        ticketId: string;
+    }>;
+    getMessages(ticketId: string): Promise<{
+        id: string;
+        createdAt: Date;
+        content: string;
+        isStaff: boolean;
+        ticketId: string;
+    }[]>;
 }

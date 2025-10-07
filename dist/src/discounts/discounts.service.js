@@ -49,6 +49,90 @@ let DiscountsService = class DiscountsService {
             where: { id },
         });
     }
+    async validateDiscount(validateDiscountDto) {
+        const discount = await this.prisma.discount.findUnique({
+            where: { code: validateDiscountDto.code },
+        });
+        if (!discount) {
+            throw new common_1.NotFoundException('Discount code not found');
+        }
+        if (!discount.isActive) {
+            throw new common_1.BadRequestException('Discount code is not active');
+        }
+        if (discount.expiresAt && new Date(discount.expiresAt) < new Date()) {
+            throw new common_1.BadRequestException('Discount code has expired');
+        }
+        if (discount.maxUses !== null && discount.usedCount >= discount.maxUses) {
+            throw new common_1.BadRequestException('Discount code usage limit reached');
+        }
+        const minAmount = discount.minAmount ? Number(discount.minAmount) : 0;
+        if (minAmount && validateDiscountDto.orderTotal < minAmount) {
+            throw new common_1.BadRequestException(`Minimum order amount of ${minAmount}€ required for this discount`);
+        }
+        let discountAmount = 0;
+        const discountValue = Number(discount.value);
+        if (discount.type === 'PERCENTAGE') {
+            discountAmount = (validateDiscountDto.orderTotal * discountValue) / 100;
+        }
+        else {
+            discountAmount = discountValue;
+        }
+        const finalAmount = Math.max(0, validateDiscountDto.orderTotal - discountAmount);
+        return {
+            valid: true,
+            discount,
+            discountAmount,
+            originalAmount: validateDiscountDto.orderTotal,
+            finalAmount,
+        };
+    }
+    async applyToOrder(applyDiscountDto) {
+        const order = await this.prisma.order.findUnique({
+            where: { id: applyDiscountDto.orderId },
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                    },
+                },
+            },
+        });
+        if (!order) {
+            throw new common_1.NotFoundException('Order not found');
+        }
+        const orderTotal = order.items.reduce((sum, item) => {
+            return sum + item.quantity * Number(item.price);
+        }, 0);
+        const validation = await this.validateDiscount({
+            code: applyDiscountDto.code,
+            orderTotal,
+            userId: order.userId,
+        });
+        const updatedOrder = await this.prisma.order.update({
+            where: { id: applyDiscountDto.orderId },
+            data: {
+                discountCode: validation.discount.code,
+                discount: validation.discountAmount,
+                total: validation.finalAmount,
+            },
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                    },
+                },
+            },
+        });
+        await this.prisma.discount.update({
+            where: { id: validation.discount.id },
+            data: {
+                usedCount: {
+                    increment: 1,
+                },
+            },
+        });
+        return updatedOrder;
+    }
 };
 exports.DiscountsService = DiscountsService;
 exports.DiscountsService = DiscountsService = __decorate([

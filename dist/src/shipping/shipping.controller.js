@@ -14,9 +14,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShippingController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const shipping_service_1 = require("./shipping.service");
 const create_shipping_dto_1 = require("./dto/create-shipping.dto");
 const update_shipping_dto_1 = require("./dto/update-shipping.dto");
+const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
+const roles_guard_1 = require("../common/guards/roles.guard");
+const roles_decorator_1 = require("../common/decorators/roles.decorator");
+const client_1 = require("@prisma/client");
 let ShippingController = class ShippingController {
     shippingService;
     constructor(shippingService) {
@@ -38,6 +43,7 @@ let ShippingController = class ShippingController {
 exports.ShippingController = ShippingController;
 __decorate([
     (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_shipping_dto_1.CreateShippingDto]),
@@ -58,6 +64,7 @@ __decorate([
 ], ShippingController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -65,6 +72,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ShippingController.prototype, "update", null);
 exports.ShippingController = ShippingController = __decorate([
+    (0, swagger_1.ApiTags)('shipping'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Controller)('shipping'),
     __metadata("design:paramtypes", [shipping_service_1.ShippingService])
 ], ShippingController);

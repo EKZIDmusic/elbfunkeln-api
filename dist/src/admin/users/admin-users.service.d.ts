@@ -5,33 +5,25 @@ export declare class AdminUsersService {
     private prisma;
     constructor(prisma: PrismaService);
     getUsers(query: UserQueryDto): Promise<{
-        data: {
-            id: string;
-            email: string;
-            firstName: string;
-            lastName: string;
-            displayName: string;
-            phone: string;
-            role: import("@prisma/client").$Enums.UserRole;
-            status: import("@prisma/client").$Enums.UserStatus;
-            isVerified: boolean;
-            isBanned: boolean;
-            twoFactorEnabled: boolean;
-            lastLogin: Date;
-            createdAt: Date;
-            updatedAt: Date;
-            _count: {
-                orders: number;
-                sessions: number;
-            };
-        }[];
-        meta: {
-            total: number;
-            page: number;
-            limit: number;
-            totalPages: number;
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        displayName: string;
+        phone: string;
+        role: import("@prisma/client").$Enums.UserRole;
+        status: import("@prisma/client").$Enums.UserStatus;
+        isVerified: boolean;
+        isBanned: boolean;
+        twoFactorEnabled: boolean;
+        lastLogin: Date;
+        createdAt: Date;
+        updatedAt: Date;
+        _count: {
+            orders: number;
+            sessions: number;
         };
-    }>;
+    }[]>;
     getUserById(id: string): Promise<{
         id: string;
         email: string;

@@ -12,7 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersController = void 0;
+exports.AccountSettingsController = exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const users_service_1 = require("./users.service");
@@ -37,6 +37,7 @@ let UsersController = class UsersController {
 exports.UsersController = UsersController;
 __decorate([
     (0, common_1.Get)('me'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get current user profile' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -44,6 +45,7 @@ __decorate([
 ], UsersController.prototype, "getProfile", null);
 __decorate([
     (0, common_1.Patch)('me'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update current user profile' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -52,7 +54,8 @@ __decorate([
 ], UsersController.prototype, "updateProfile", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, swagger_1.ApiOperation)({ summary: 'Get user by ID' }),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
@@ -64,4 +67,41 @@ exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
+let AccountSettingsController = class AccountSettingsController {
+    usersService;
+    constructor(usersService) {
+        this.usersService = usersService;
+    }
+    getAccountSettings(id) {
+        return this.usersService.findOne(id);
+    }
+    updateAccountSettings(id, updateUserDto) {
+        return this.usersService.update(id, updateUserDto);
+    }
+};
+exports.AccountSettingsController = AccountSettingsController;
+__decorate([
+    (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get account settings by user ID' }),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AccountSettingsController.prototype, "getAccountSettings", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update account settings by user ID' }),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:returntype", void 0)
+], AccountSettingsController.prototype, "updateAccountSettings", null);
+exports.AccountSettingsController = AccountSettingsController = __decorate([
+    (0, swagger_1.ApiTags)('account-settings'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Controller)('account-settings'),
+    __metadata("design:paramtypes", [users_service_1.UsersService])
+], AccountSettingsController);
 //# sourceMappingURL=users.controller.js.map

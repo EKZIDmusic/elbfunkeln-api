@@ -3,6 +3,22 @@ import { DateRangeQueryDto } from './dto/date-range-query.dto';
 export declare class AdminAnalyticsController {
     private readonly adminAnalyticsService;
     constructor(adminAnalyticsService: AdminAnalyticsService);
+    getStats(): Promise<{
+        totalRevenue: number | import("@prisma/client/runtime/library").Decimal;
+        totalOrders: number;
+        totalCustomers: number;
+        pendingOrders: number;
+        newsletterSubscribers: number;
+        pendingInquiries: number;
+        recentOrders: number;
+        topProducts: {
+            productId: any;
+            name: string;
+            sku: string;
+            unitsSold: any;
+            orders: any;
+        }[];
+    }>;
     getDashboardStats(): Promise<{
         totalRevenue: number | import("@prisma/client/runtime/library").Decimal;
         totalOrders: number;
