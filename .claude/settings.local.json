@@ -18,7 +18,8 @@
       "Bash(do git mv \"src/$dir\" \"src/modules/\")",
       "Bash(echo:*)",
       "Bash(done)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(npx prisma migrate dev:*)"
     ],
     "deny": [],
     "ask": []
