@@ -37,9 +37,10 @@ export class ProductsService {
     const skip = (page - 1) * limit;
     const where: {
       isActive: boolean;
+      isDeleted: boolean;
       categoryId?: string;
       OR?: Array<{ name?: { contains: string }; description?: { contains: string } }>;
-    } = { isActive: true };
+    } = { isActive: true, isDeleted: false };
 
     if (categoryId) {
       where.categoryId = categoryId;
@@ -75,8 +76,11 @@ export class ProductsService {
   }
 
   async findOne(id: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { id },
+    const product = await this.prisma.product.findFirst({
+      where: {
+        id,
+        isDeleted: false,
+      },
       include: {
         category: true,
         images: true,
@@ -92,7 +96,7 @@ export class ProductsService {
 
   async findFeatured() {
     return this.prisma.product.findMany({
-      where: { isFeatured: true, isActive: true },
+      where: { isFeatured: true, isActive: true, isDeleted: false },
       include: {
         category: true,
         images: { where: { isPrimary: true } },
@@ -106,6 +110,7 @@ export class ProductsService {
       where: {
         AND: [
           { isActive: true },
+          { isDeleted: false },
           {
             OR: [
               { name: { contains: query } },
@@ -146,9 +151,65 @@ export class ProductsService {
   }
 
   async remove(id: string) {
+    // Prüfe ob Produkt existiert
+    await this.findOne(id);
+
     return this.prisma.product.update({
       where: { id },
-      data: { isActive: false },
+      data: {
+        isDeleted: true,
+        deletedAt: new Date(),
+      },
+      include: { category: true, images: true },
+    });
+  }
+
+  async findArchived() {
+    return this.prisma.product.findMany({
+      where: { isDeleted: true },
+      include: {
+        category: true,
+        images: { where: { isPrimary: true } },
+      },
+      orderBy: { deletedAt: 'desc' },
+    });
+  }
+
+  async restore(id: string) {
+    const product = await this.prisma.product.findUnique({
+      where: { id },
+      include: { category: true, images: true },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Produkt mit ID ${id} nicht gefunden`);
+    }
+
+    if (!product.isDeleted) {
+      throw new BadRequestException(`Produkt mit ID ${id} ist nicht archiviert`);
+    }
+
+    return this.prisma.product.update({
+      where: { id },
+      data: {
+        isDeleted: false,
+        deletedAt: null,
+      },
+      include: { category: true, images: true },
+    });
+  }
+
+  async permanentDelete(id: string) {
+    const product = await this.prisma.product.findUnique({
+      where: { id },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Produkt mit ID ${id} nicht gefunden`);
+    }
+
+    return this.prisma.product.delete({
+      where: { id },
     });
   }
 }

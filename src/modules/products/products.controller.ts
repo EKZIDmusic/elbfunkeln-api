@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, ParseUUIDPipe, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -27,6 +27,15 @@ export class ProductsController {
     @Query('search') search?: string,
   ) {
     return this.productsService.findAll(Number(page) || 1, Number(limit) || 20, categoryId, search);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.ADMIN, UserRole.SHOP_OWNER)
+  @Get('archived')
+  @ApiOperation({ summary: 'Get archived products (Admin/Shop Owner)' })
+  findArchived() {
+    return this.productsService.findArchived();
   }
 
   @Public()
@@ -74,10 +83,30 @@ export class ProductsController {
 
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.SHOP_OWNER)
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete product (Admin only)' })
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Archive product - Soft delete (Admin/Shop Owner)' })
   remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return this.productsService.remove(id);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.ADMIN, UserRole.SHOP_OWNER)
+  @Post(':id/restore')
+  @ApiOperation({ summary: 'Restore archived product (Admin/Shop Owner)' })
+  restore(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    return this.productsService.restore(id);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @Delete(':id/permanent')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Permanently delete product (Admin only)' })
+  permanentDelete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    return this.productsService.permanentDelete(id);
   }
 }
