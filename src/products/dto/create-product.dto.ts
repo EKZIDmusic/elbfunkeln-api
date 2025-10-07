@@ -35,7 +35,7 @@ export class CreateProductDto {
   stock!: number;
 
   @ApiProperty()
-  @IsUUID()
+  @IsUUID('4', { message: 'categoryId muss eine gültige UUID sein' })
   categoryId!: string;
 
   @ApiProperty({ required: false, default: true })

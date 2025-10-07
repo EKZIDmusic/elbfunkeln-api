@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, ParseUUIDPipe } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -47,14 +47,14 @@ export class ProductsController {
   @Public()
   @Get(':id')
   @ApiOperation({ summary: 'Get product by ID' })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return this.productsService.findOne(id);
   }
 
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.SHOP_OWNER)
-  @Post('products')
+  @Post()
   @ApiOperation({ summary: 'Create product (Admin/Shop Owner)' })
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
@@ -65,7 +65,10 @@ export class ProductsController {
   @Roles(UserRole.ADMIN, UserRole.SHOP_OWNER)
   @Put(':id')
   @ApiOperation({ summary: 'Update product (Admin/Shop Owner)' })
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+  update(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Body() updateProductDto: UpdateProductDto,
+  ) {
     return this.productsService.update(id, updateProductDto);
   }
 
@@ -74,7 +77,7 @@ export class ProductsController {
   @Roles(UserRole.ADMIN)
   @Delete(':id')
   @ApiOperation({ summary: 'Delete product (Admin only)' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return this.productsService.remove(id);
   }
 }
