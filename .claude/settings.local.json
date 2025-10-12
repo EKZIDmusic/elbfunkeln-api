@@ -22,7 +22,8 @@
       "Bash(npx prisma migrate dev:*)",
       "Bash(git push:*)",
       "Read(//c/Users/kvhfw/elbfunkeln-projekt/**)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Read(//c/Users/kvhfw/**)"
     ],
     "deny": [],
     "ask": []
