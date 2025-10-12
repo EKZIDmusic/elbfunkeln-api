@@ -46,6 +46,15 @@ export class AdminProductsController {
     return this.productsService.findAll(query);
   }
 
+  @Get('archived')
+  @ApiOperation({ summary: 'Get archived products (admin only)' })
+  @ApiResponse({ status: 200, description: 'Archived products retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
+  findArchived() {
+    return this.productsService.findArchived();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get product by ID (admin only)' })
   @ApiParam({ name: 'id', description: 'Product ID' })
