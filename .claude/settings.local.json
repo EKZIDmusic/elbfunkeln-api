@@ -19,7 +19,8 @@
       "Bash(echo:*)",
       "Bash(done)",
       "Bash(tree:*)",
-      "Bash(npx prisma migrate dev:*)"
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
