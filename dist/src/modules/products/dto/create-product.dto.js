@@ -9,10 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateProductDto = void 0;
+exports.CreateProductDto = exports.ProductImageDto = void 0;
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
+class ProductImageDto {
+    url;
+    alt;
+    isPrimary;
+}
+exports.ProductImageDto = ProductImageDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'https://i.imgur.com/example.jpg' }),
+    (0, class_validator_1.IsUrl)({}, { message: 'URL muss eine gültige URL sein' }),
+    __metadata("design:type", String)
+], ProductImageDto.prototype, "url", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Produktbild Vorderansicht', required: false }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], ProductImageDto.prototype, "alt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: true, required: false, default: false }),
+    (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], ProductImageDto.prototype, "isPrimary", void 0);
 class CreateProductDto {
     name;
     description;
@@ -24,6 +47,7 @@ class CreateProductDto {
     isActive;
     isFeatured;
     giftboxavailable;
+    images;
 }
 exports.CreateProductDto = CreateProductDto;
 __decorate([
@@ -86,4 +110,19 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateProductDto.prototype, "giftboxavailable", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        type: [ProductImageDto],
+        required: false,
+        example: [
+            { url: 'https://i.imgur.com/example1.jpg', alt: 'Vorderansicht', isPrimary: true },
+            { url: 'https://i.imgur.com/example2.jpg', alt: 'Seitenansicht', isPrimary: false }
+        ]
+    }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => ProductImageDto),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Array)
+], CreateProductDto.prototype, "images", void 0);
 //# sourceMappingURL=create-product.dto.js.map

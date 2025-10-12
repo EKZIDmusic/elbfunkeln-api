@@ -30,8 +30,20 @@ let ProductsService = class ProductsService {
         if (!category) {
             throw new common_1.NotFoundException(`Kategorie mit ID ${createProductDto.categoryId} nicht gefunden`);
         }
+        const { images, ...productData } = createProductDto;
         return this.prisma.product.create({
-            data: createProductDto,
+            data: {
+                ...productData,
+                images: images && images.length > 0
+                    ? {
+                        create: images.map((img) => ({
+                            url: img.url,
+                            alt: img.alt,
+                            isPrimary: img.isPrimary ?? false,
+                        })),
+                    }
+                    : undefined,
+            },
             include: { category: true, images: true },
         });
     }
@@ -51,7 +63,13 @@ let ProductsService = class ProductsService {
                 where,
                 include: {
                     category: true,
-                    images: { where: { isPrimary: true } },
+                    images: {
+                        orderBy: [
+                            { isPrimary: 'desc' },
+                            { createdAt: 'asc' }
+                        ],
+                        take: 1
+                    },
                 },
                 orderBy: { createdAt: 'desc' },
             }),
@@ -88,7 +106,13 @@ let ProductsService = class ProductsService {
             where: { isFeatured: true, isActive: true, isDeleted: false },
             include: {
                 category: true,
-                images: { where: { isPrimary: true } },
+                images: {
+                    orderBy: [
+                        { isPrimary: 'desc' },
+                        { createdAt: 'asc' }
+                    ],
+                    take: 1
+                },
             },
             take: 10,
         });
@@ -110,7 +134,13 @@ let ProductsService = class ProductsService {
             },
             include: {
                 category: true,
-                images: { where: { isPrimary: true } },
+                images: {
+                    orderBy: [
+                        { isPrimary: 'desc' },
+                        { createdAt: 'asc' }
+                    ],
+                    take: 1
+                },
             },
         });
     }
@@ -124,9 +154,26 @@ let ProductsService = class ProductsService {
                 throw new common_1.NotFoundException(`Kategorie mit ID ${updateProductDto.categoryId} nicht gefunden`);
             }
         }
+        const { images, ...productData } = updateProductDto;
+        if (images !== undefined) {
+            await this.prisma.productImage.deleteMany({
+                where: { productId: id },
+            });
+        }
         return this.prisma.product.update({
             where: { id },
-            data: updateProductDto,
+            data: {
+                ...productData,
+                images: images && images.length > 0
+                    ? {
+                        create: images.map((img) => ({
+                            url: img.url,
+                            alt: img.alt,
+                            isPrimary: img.isPrimary ?? false,
+                        })),
+                    }
+                    : undefined,
+            },
             include: { category: true, images: true },
         });
     }
@@ -146,7 +193,13 @@ let ProductsService = class ProductsService {
             where: { isDeleted: true },
             include: {
                 category: true,
-                images: { where: { isPrimary: true } },
+                images: {
+                    orderBy: [
+                        { isPrimary: 'desc' },
+                        { createdAt: 'asc' }
+                    ],
+                    take: 1
+                },
             },
             orderBy: { deletedAt: 'desc' },
         });

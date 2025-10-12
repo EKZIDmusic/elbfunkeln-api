@@ -1,3 +1,8 @@
+export declare class ProductImageDto {
+    url: string;
+    alt?: string;
+    isPrimary?: boolean;
+}
 export declare class CreateProductDto {
     name: string;
     description: string;
@@ -9,4 +14,5 @@ export declare class CreateProductDto {
     isActive?: boolean;
     isFeatured?: boolean;
     giftboxavailable?: boolean;
+    images?: ProductImageDto[];
 }
