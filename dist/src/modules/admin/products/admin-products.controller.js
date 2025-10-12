@@ -32,6 +32,9 @@ let AdminProductsController = class AdminProductsController {
     findAll(query) {
         return this.productsService.findAll(query);
     }
+    findArchived() {
+        return this.productsService.findArchived();
+    }
     findOne(id) {
         return this.productsService.findOne(id);
     }
@@ -40,6 +43,12 @@ let AdminProductsController = class AdminProductsController {
     }
     remove(id) {
         return this.productsService.remove(id);
+    }
+    restore(id) {
+        return this.productsService.restore(id);
+    }
+    permanentDelete(id) {
+        return this.productsService.permanentDelete(id);
     }
 };
 exports.AdminProductsController = AdminProductsController;
@@ -65,6 +74,16 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AdminProductsController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('archived'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get archived products (admin only)' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Archived products retrieved successfully' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Unauthorized' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AdminProductsController.prototype, "findArchived", null);
 __decorate([
     (0, common_1.Get)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Get product by ID (admin only)' }),
@@ -101,12 +120,40 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 401, description: 'Unauthorized' }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden - Requires ADMIN role only' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Product not found' }),
-    (0, roles_decorator_1.Roles)('ADMIN'),
+    (0, roles_decorator_1.Roles)('ADMIN', 'SHOP_OWNER'),
     __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], AdminProductsController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)(':id/restore'),
+    (0, swagger_1.ApiOperation)({ summary: 'Restore archived product (admin only)' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Product ID' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Product restored successfully' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Unauthorized' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Product not found' }),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AdminProductsController.prototype, "restore", null);
+__decorate([
+    (0, common_1.Delete)(':id/permanent'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
+    (0, swagger_1.ApiOperation)({ summary: 'Permanently delete product (admin only)' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Product ID' }),
+    (0, swagger_1.ApiResponse)({ status: 204, description: 'Product permanently deleted' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Unauthorized' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden - Requires ADMIN role only' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Product not found' }),
+    (0, roles_decorator_1.Roles)('ADMIN'),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AdminProductsController.prototype, "permanentDelete", null);
 exports.AdminProductsController = AdminProductsController = __decorate([
     (0, swagger_1.ApiTags)('Admin - Products'),
     (0, swagger_1.ApiBearerAuth)(),

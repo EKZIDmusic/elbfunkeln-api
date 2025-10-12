@@ -37,7 +37,7 @@ let ProductsService = class ProductsService {
     }
     async findAll(page = 1, limit = 20, categoryId, search) {
         const skip = (page - 1) * limit;
-        const where = { isActive: true };
+        const where = { isActive: true, isDeleted: false };
         if (categoryId) {
             where.categoryId = categoryId;
         }
@@ -68,8 +68,11 @@ let ProductsService = class ProductsService {
         };
     }
     async findOne(id) {
-        const product = await this.prisma.product.findUnique({
-            where: { id },
+        const product = await this.prisma.product.findFirst({
+            where: {
+                id,
+                isDeleted: false,
+            },
             include: {
                 category: true,
                 images: true,
@@ -82,7 +85,7 @@ let ProductsService = class ProductsService {
     }
     async findFeatured() {
         return this.prisma.product.findMany({
-            where: { isFeatured: true, isActive: true },
+            where: { isFeatured: true, isActive: true, isDeleted: false },
             include: {
                 category: true,
                 images: { where: { isPrimary: true } },
@@ -95,6 +98,7 @@ let ProductsService = class ProductsService {
             where: {
                 AND: [
                     { isActive: true },
+                    { isDeleted: false },
                     {
                         OR: [
                             { name: { contains: query } },
@@ -127,9 +131,64 @@ let ProductsService = class ProductsService {
         });
     }
     async remove(id) {
+        await this.findOne(id);
         return this.prisma.product.update({
             where: { id },
-            data: { isActive: false },
+            data: {
+                isDeleted: true,
+                deletedAt: new Date(),
+            },
+            include: { category: true, images: true },
+        });
+    }
+    async findArchived() {
+        return this.prisma.product.findMany({
+            where: { isDeleted: true },
+            include: {
+                category: true,
+                images: { where: { isPrimary: true } },
+            },
+            orderBy: { deletedAt: 'desc' },
+        });
+    }
+    async restore(id) {
+        const product = await this.prisma.product.findUnique({
+            where: { id },
+            include: { category: true, images: true },
+        });
+        if (!product) {
+            throw new common_1.NotFoundException(`Produkt mit ID ${id} nicht gefunden`);
+        }
+        if (!product.isDeleted) {
+            throw new common_1.BadRequestException(`Produkt mit ID ${id} ist nicht archiviert`);
+        }
+        return this.prisma.product.update({
+            where: { id },
+            data: {
+                isDeleted: false,
+                deletedAt: null,
+            },
+            include: { category: true, images: true },
+        });
+    }
+    async permanentDelete(id) {
+        const product = await this.prisma.product.findUnique({
+            where: { id },
+            include: {
+                orderItems: true,
+            },
+        });
+        if (!product) {
+            throw new common_1.NotFoundException(`Produkt mit ID ${id} nicht gefunden`);
+        }
+        if (product.orderItems && product.orderItems.length > 0) {
+            throw new common_1.BadRequestException('Produkt kann nicht gelöscht werden, da es Teil von Bestellungen ist. Bitte archivieren Sie das Produkt stattdessen.');
+        }
+        await this.prisma.cartItem.deleteMany({
+            where: { productId: id },
+        });
+        return this.prisma.product.delete({
+            where: { id },
         });
     }
 };

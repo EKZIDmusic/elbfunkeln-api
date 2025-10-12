@@ -202,12 +202,28 @@ export class ProductsService {
   async permanentDelete(id: string) {
     const product = await this.prisma.product.findUnique({
       where: { id },
+      include: {
+        orderItems: true,
+      },
     });
 
     if (!product) {
       throw new NotFoundException(`Produkt mit ID ${id} nicht gefunden`);
     }
 
+    // Prevent deletion if product has order history
+    if (product.orderItems && product.orderItems.length > 0) {
+      throw new BadRequestException(
+        'Produkt kann nicht gelöscht werden, da es Teil von Bestellungen ist. Bitte archivieren Sie das Produkt stattdessen.',
+      );
+    }
+
+    // Delete related cart items first
+    await this.prisma.cartItem.deleteMany({
+      where: { productId: id },
+    });
+
+    // Delete the product (cascades will handle images, favorites, reviews)
     return this.prisma.product.delete({
       where: { id },
     });

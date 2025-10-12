@@ -30,6 +30,9 @@ let ProductsController = class ProductsController {
     findAll(page, limit, categoryId, search) {
         return this.productsService.findAll(Number(page) || 1, Number(limit) || 20, categoryId, search);
     }
+    findArchived() {
+        return this.productsService.findArchived();
+    }
     findFeatured() {
         return this.productsService.findFeatured();
     }
@@ -47,6 +50,12 @@ let ProductsController = class ProductsController {
     }
     remove(id) {
         return this.productsService.remove(id);
+    }
+    restore(id) {
+        return this.productsService.restore(id);
+    }
+    permanentDelete(id) {
+        return this.productsService.permanentDelete(id);
     }
 };
 exports.ProductsController = ProductsController;
@@ -66,6 +75,16 @@ __decorate([
     __metadata("design:paramtypes", [String, String, String, String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findAll", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN, client_1.UserRole.SHOP_OWNER),
+    (0, common_1.Get)('archived'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get archived products (Admin/Shop Owner)' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "findArchived", null);
 __decorate([
     (0, public_decorator_1.Public)(),
     (0, common_1.Get)('featured'),
@@ -119,14 +138,38 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN, client_1.UserRole.SHOP_OWNER),
     (0, common_1.Delete)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Delete product (Admin only)' }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({ summary: 'Archive product - Soft delete (Admin/Shop Owner)' }),
     __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "remove", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN, client_1.UserRole.SHOP_OWNER),
+    (0, common_1.Post)(':id/restore'),
+    (0, swagger_1.ApiOperation)({ summary: 'Restore archived product (Admin/Shop Owner)' }),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "restore", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.ADMIN),
+    (0, common_1.Delete)(':id/permanent'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
+    (0, swagger_1.ApiOperation)({ summary: 'Permanently delete product (Admin only)' }),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe({ version: '4' }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "permanentDelete", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, swagger_1.ApiTags)('products'),
     (0, common_1.Controller)('products'),

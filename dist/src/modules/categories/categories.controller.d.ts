@@ -64,6 +64,8 @@ export declare class CategoriesController {
             isFeatured: boolean;
             giftboxavailable: boolean;
             categoryId: string;
+            isDeleted: boolean;
+            deletedAt: Date | null;
         })[];
     } & {
         id: string;
