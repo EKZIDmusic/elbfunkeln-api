@@ -92,4 +92,28 @@ export class AdminProductsController {
   remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return this.productsService.remove(id);
   }
+
+  @Post(':id/restore')
+  @ApiOperation({ summary: 'Restore archived product (admin only)' })
+  @ApiParam({ name: 'id', description: 'Product ID' })
+  @ApiResponse({ status: 200, description: 'Product restored successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN or SHOP_OWNER role' })
+  @ApiResponse({ status: 404, description: 'Product not found' })
+  restore(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    return this.productsService.restore(id);
+  }
+
+  @Delete(':id/permanent')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Permanently delete product (admin only)' })
+  @ApiParam({ name: 'id', description: 'Product ID' })
+  @ApiResponse({ status: 204, description: 'Product permanently deleted' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden - Requires ADMIN role only' })
+  @ApiResponse({ status: 404, description: 'Product not found' })
+  @Roles('ADMIN')
+  permanentDelete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    return this.productsService.permanentDelete(id);
+  }
 }
