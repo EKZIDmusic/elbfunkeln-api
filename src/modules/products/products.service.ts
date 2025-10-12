@@ -70,7 +70,13 @@ export class ProductsService {
         where,
         include: {
           category: true,
-          images: { where: { isPrimary: true } },
+          images: {
+            orderBy: [
+              { isPrimary: 'desc' },
+              { createdAt: 'asc' }
+            ],
+            take: 1
+          },
         },
         orderBy: { createdAt: 'desc' },
       }),
@@ -112,7 +118,13 @@ export class ProductsService {
       where: { isFeatured: true, isActive: true, isDeleted: false },
       include: {
         category: true,
-        images: { where: { isPrimary: true } },
+        images: {
+          orderBy: [
+            { isPrimary: 'desc' },
+            { createdAt: 'asc' }
+          ],
+          take: 1
+        },
       },
       take: 10,
     });
@@ -135,7 +147,13 @@ export class ProductsService {
       },
       include: {
         category: true,
-        images: { where: { isPrimary: true } },
+        images: {
+          orderBy: [
+            { isPrimary: 'desc' },
+            { createdAt: 'asc' }
+          ],
+          take: 1
+        },
       },
     });
   }
@@ -203,7 +221,13 @@ export class ProductsService {
       where: { isDeleted: true },
       include: {
         category: true,
-        images: { where: { isPrimary: true } },
+        images: {
+          orderBy: [
+            { isPrimary: 'desc' },
+            { createdAt: 'asc' }
+          ],
+          take: 1
+        },
       },
       orderBy: { deletedAt: 'desc' },
     });
