@@ -27,8 +27,21 @@ export class ProductsService {
       );
     }
 
+    const { images, ...productData } = createProductDto;
+
     return this.prisma.product.create({
-      data: createProductDto,
+      data: {
+        ...productData,
+        images: images && images.length > 0
+          ? {
+              create: images.map((img) => ({
+                url: img.url,
+                alt: img.alt,
+                isPrimary: img.isPrimary ?? false,
+              })),
+            }
+          : undefined,
+      },
       include: { category: true, images: true },
     });
   }
@@ -143,9 +156,30 @@ export class ProductsService {
       }
     }
 
+    const { images, ...productData } = updateProductDto;
+
+    // Wenn Bilder bereitgestellt werden, ersetze alle bestehenden Bilder
+    if (images !== undefined) {
+      // Lösche alle bestehenden Bilder
+      await this.prisma.productImage.deleteMany({
+        where: { productId: id },
+      });
+    }
+
     return this.prisma.product.update({
       where: { id },
-      data: updateProductDto,
+      data: {
+        ...productData,
+        images: images && images.length > 0
+          ? {
+              create: images.map((img) => ({
+                url: img.url,
+                alt: img.alt,
+                isPrimary: img.isPrimary ?? false,
+              })),
+            }
+          : undefined,
+      },
       include: { category: true, images: true },
     });
   }

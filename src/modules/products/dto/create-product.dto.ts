@@ -1,6 +1,22 @@
-import { IsString, IsNumber, IsBoolean, IsOptional, IsUUID, Min } from 'class-validator';
+import { IsString, IsNumber, IsBoolean, IsOptional, IsUUID, Min, IsArray, IsUrl, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
+
+export class ProductImageDto {
+  @ApiProperty({ example: 'https://i.imgur.com/example.jpg' })
+  @IsUrl({}, { message: 'URL muss eine gültige URL sein' })
+  url!: string;
+
+  @ApiProperty({ example: 'Produktbild Vorderansicht', required: false })
+  @IsString()
+  @IsOptional()
+  alt?: string;
+
+  @ApiProperty({ example: true, required: false, default: false })
+  @IsBoolean()
+  @IsOptional()
+  isPrimary?: boolean;
+}
 
 export class CreateProductDto {
   @ApiProperty({ example: 'Drahtring Silber' })
@@ -52,4 +68,18 @@ export class CreateProductDto {
   @IsBoolean()
   @IsOptional()
   giftboxavailable?: boolean;
+
+  @ApiProperty({
+    type: [ProductImageDto],
+    required: false,
+    example: [
+      { url: 'https://i.imgur.com/example1.jpg', alt: 'Vorderansicht', isPrimary: true },
+      { url: 'https://i.imgur.com/example2.jpg', alt: 'Seitenansicht', isPrimary: false }
+    ]
+  })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductImageDto)
+  @IsOptional()
+  images?: ProductImageDto[];
 }
