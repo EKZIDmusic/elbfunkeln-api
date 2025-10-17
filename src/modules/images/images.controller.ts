@@ -58,7 +58,7 @@ export class ImagesController {
   )
   async uploadProductImage(
     @Param('productId') productId: string,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: any,
     @Body('alt') alt?: string,
     @Body('isPrimary') isPrimary?: string,
   ) {

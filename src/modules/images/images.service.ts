@@ -7,7 +7,7 @@ export class ImagesService {
 
   async uploadProductImage(
     productId: string,
-    file: Express.Multer.File,
+    file: any,
     alt?: string,
     isPrimary?: boolean,
   ) {
