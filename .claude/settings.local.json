@@ -25,7 +25,8 @@
       "Bash(node:*)",
       "Read(//c/Users/kvhfw/**)",
       "Bash(npx prisma db pull:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npm run start)"
     ],
     "deny": [],
     "ask": []
