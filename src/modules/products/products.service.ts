@@ -75,7 +75,13 @@ export class ProductsService {
               { isPrimary: 'desc' },
               { createdAt: 'asc' }
             ],
-            take: 1
+            take: 1,
+            select: {
+              id: true,
+              alt: true,
+              isPrimary: true,
+              url: true,
+            },
           },
         },
         orderBy: { createdAt: 'desc' },
@@ -83,8 +89,17 @@ export class ProductsService {
       this.prisma.product.count({ where }),
     ]);
 
+    // Map image URLs to include API endpoint for BLOB images
+    const productsWithImageUrls = products.map((product) => ({
+      ...product,
+      images: product.images.map((img) => ({
+        ...img,
+        url: img.url || `/api/images/${img.id}`,
+      })),
+    }));
+
     return {
-      data: products,
+      data: productsWithImageUrls,
       meta: {
         page,
         limit,
@@ -102,7 +117,14 @@ export class ProductsService {
       },
       include: {
         category: true,
-        images: true,
+        images: {
+          select: {
+            id: true,
+            alt: true,
+            isPrimary: true,
+            url: true,
+          },
+        },
       },
     });
 
@@ -110,11 +132,17 @@ export class ProductsService {
       throw new NotFoundException('Product not found');
     }
 
-    return product;
+    return {
+      ...product,
+      images: product.images.map((img) => ({
+        ...img,
+        url: img.url || `/api/images/${img.id}`,
+      })),
+    };
   }
 
   async findFeatured() {
-    return this.prisma.product.findMany({
+    const products = await this.prisma.product.findMany({
       where: { isFeatured: true, isActive: true, isDeleted: false },
       include: {
         category: true,
@@ -123,15 +151,29 @@ export class ProductsService {
             { isPrimary: 'desc' },
             { createdAt: 'asc' }
           ],
-          take: 1
+          take: 1,
+          select: {
+            id: true,
+            alt: true,
+            isPrimary: true,
+            url: true,
+          },
         },
       },
       take: 10,
     });
+
+    return products.map((product) => ({
+      ...product,
+      images: product.images.map((img) => ({
+        ...img,
+        url: img.url || `/api/images/${img.id}`,
+      })),
+    }));
   }
 
   async search(query: string) {
-    return this.prisma.product.findMany({
+    const products = await this.prisma.product.findMany({
       where: {
         AND: [
           { isActive: true },
@@ -152,10 +194,24 @@ export class ProductsService {
             { isPrimary: 'desc' },
             { createdAt: 'asc' }
           ],
-          take: 1
+          take: 1,
+          select: {
+            id: true,
+            alt: true,
+            isPrimary: true,
+            url: true,
+          },
         },
       },
     });
+
+    return products.map((product) => ({
+      ...product,
+      images: product.images.map((img) => ({
+        ...img,
+        url: img.url || `/api/images/${img.id}`,
+      })),
+    }));
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {

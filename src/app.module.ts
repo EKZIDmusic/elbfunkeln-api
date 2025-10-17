@@ -22,6 +22,7 @@ import { ShippingModule } from './modules/shipping/shipping.module';
 import { EmailModule } from './shared/email/email.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { ContactModule } from './modules/contact/contact.module';
+import { ImagesModule } from './modules/images/images.module';
 import { JwtAuthGuard } from './core/auth/guards/jwt-auth.guard';
 
 @Module({
@@ -55,6 +56,7 @@ import { JwtAuthGuard } from './core/auth/guards/jwt-auth.guard';
     EmailModule,
     AdminModule,
     ContactModule,
+    ImagesModule,
   ],
   providers: [
     {
