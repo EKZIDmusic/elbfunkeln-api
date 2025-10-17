@@ -5,7 +5,10 @@ import { AppModule } from './app.module';
 import { DecimalToNumberInterceptor } from './core/interceptors/decimal-to-number.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bodyParser: true,
+    rawBody: true,
+  });
 
   // Security middleware
   // Note: helmet, compression, cookieParser werden erst nach Installation verwendet
@@ -16,6 +19,10 @@ async function bootstrap() {
   // app.use(helmet());
   // app.use(compression());
   // app.use(cookieParser());
+
+  // Increase body size limits for file uploads
+  app.use(require('express').json({ limit: '50mb' }));
+  app.use(require('express').urlencoded({ limit: '50mb', extended: true }));
 
   // CORS configuration
   app.enableCors({
@@ -29,7 +36,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
-      forbidNonWhitelisted: true,
+      forbidNonWhitelisted: false, // Allow extra fields but strip them out
       transform: true,
       transformOptions: {
         enableImplicitConversion: true,

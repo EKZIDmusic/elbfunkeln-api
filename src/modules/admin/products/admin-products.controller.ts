@@ -13,6 +13,7 @@ import {
   ParseUUIDPipe,
   UseInterceptors,
   UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam, ApiConsumes, ApiBody } from '@nestjs/swagger';
@@ -152,13 +153,32 @@ export class AdminProductsController {
   @ApiResponse({ status: 400, description: 'Bad request - invalid file' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Product not found' })
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(
+    FileInterceptor('file', {
+      limits: {
+        fileSize: 10 * 1024 * 1024, // 10MB limit for admin uploads
+      },
+      fileFilter: (req, file, cb) => {
+        if (!file.mimetype.match(/^image\/(jpeg|jpg|png|gif|webp)$/)) {
+          return cb(
+            new BadRequestException('Only image files are allowed'),
+            false,
+          );
+        }
+        cb(null, true);
+      },
+    }),
+  )
   uploadImage(
     @Param('id', new ParseUUIDPipe({ version: '4' })) productId: string,
     @UploadedFile() file: any,
     @Body('alt') alt?: string,
     @Body('isPrimary') isPrimary?: string,
   ) {
+    if (!file) {
+      throw new BadRequestException('File is required');
+    }
+
     return this.imagesService.uploadProductImage(
       productId,
       file,

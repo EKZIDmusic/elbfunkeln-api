@@ -3,9 +3,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 export class ProductImageDto {
-  @ApiProperty({ example: 'https://i.imgur.com/example.jpg' })
+  @ApiProperty({ example: 'https://i.imgur.com/example.jpg', required: false })
   @IsUrl({}, { message: 'URL muss eine gültige URL sein' })
-  url!: string;
+  @IsOptional()
+  url?: string;
 
   @ApiProperty({ example: 'Produktbild Vorderansicht', required: false })
   @IsString()
