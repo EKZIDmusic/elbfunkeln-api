@@ -168,7 +168,7 @@ export class AdminProductsController {
   )
   uploadImage(
     @Param('id', new ParseUUIDPipe({ version: '4' })) productId: string,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: any,
     @Body('alt') alt?: string,
     @Body('isPrimary') isPrimary?: string,
   ) {
