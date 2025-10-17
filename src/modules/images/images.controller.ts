@@ -42,9 +42,6 @@ export class ImagesController {
   })
   @UseInterceptors(
     FileInterceptor('file', {
-      limits: {
-        fileSize: 5 * 1024 * 1024, // 5MB
-      },
       fileFilter: (req, file, cb) => {
         if (!file.mimetype.match(/^image\/(jpeg|jpg|png|gif|webp)$/)) {
           return cb(
@@ -58,7 +55,7 @@ export class ImagesController {
   )
   async uploadProductImage(
     @Param('productId') productId: string,
-    @UploadedFile() file: any,
+    @UploadedFile() file: Express.Multer.File,
     @Body('alt') alt?: string,
     @Body('isPrimary') isPrimary?: string,
   ) {

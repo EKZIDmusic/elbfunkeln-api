@@ -7,7 +7,7 @@ export class ImagesService {
 
   async uploadProductImage(
     productId: string,
-    file: any,
+    file: Express.Multer.File,
     alt?: string,
     isPrimary?: boolean,
   ) {
@@ -28,14 +28,15 @@ export class ImagesService {
       });
     }
 
-    // Create the image record with BLOB data
+    // Create the image record with BLOB data (stored directly in database)
     const image = await this.prisma.productImage.create({
       data: {
         productId,
-        data: file.buffer,
+        data: file.buffer, // Store file buffer as BLOB
         mimeType: file.mimetype,
         alt: alt || file.originalname,
         isPrimary: isPrimary || false,
+        url: null, // We don't use URL anymore, only BLOB storage
       },
     });
 
@@ -45,6 +46,7 @@ export class ImagesService {
       alt: image.alt,
       isPrimary: image.isPrimary,
       mimeType: image.mimeType,
+      size: file.size,
       createdAt: image.createdAt,
     };
   }

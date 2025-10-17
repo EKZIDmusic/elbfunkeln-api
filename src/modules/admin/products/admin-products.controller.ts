@@ -155,9 +155,6 @@ export class AdminProductsController {
   @ApiResponse({ status: 404, description: 'Product not found' })
   @UseInterceptors(
     FileInterceptor('file', {
-      limits: {
-        fileSize: 10 * 1024 * 1024, // 10MB limit for admin uploads
-      },
       fileFilter: (req, file, cb) => {
         if (!file.mimetype.match(/^image\/(jpeg|jpg|png|gif|webp)$/)) {
           return cb(
@@ -171,7 +168,7 @@ export class AdminProductsController {
   )
   uploadImage(
     @Param('id', new ParseUUIDPipe({ version: '4' })) productId: string,
-    @UploadedFile() file: any,
+    @UploadedFile() file: Express.Multer.File,
     @Body('alt') alt?: string,
     @Body('isPrimary') isPrimary?: string,
   ) {
