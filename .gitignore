@@ -5,3 +5,10 @@ node_modules
 /Prisma/migrations
 
 /generated/prisma
+
+# Build output
+dist/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
