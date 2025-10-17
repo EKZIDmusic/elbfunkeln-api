@@ -34,11 +34,15 @@ export class ProductsService {
         ...productData,
         images: images && images.length > 0
           ? {
-              create: images.map((img) => ({
-                url: img.url,
-                alt: img.alt,
-                isPrimary: img.isPrimary ?? false,
-              })),
+              create: images.map((img) => {
+                // Entferne id und andere nicht erlaubte Felder
+                const { url, alt, isPrimary } = img;
+                return {
+                  url,
+                  alt,
+                  isPrimary: isPrimary ?? false,
+                };
+              }),
             }
           : undefined,
       },
@@ -246,11 +250,15 @@ export class ProductsService {
         ...productData,
         images: images && images.length > 0
           ? {
-              create: images.map((img) => ({
-                url: img.url,
-                alt: img.alt,
-                isPrimary: img.isPrimary ?? false,
-              })),
+              create: images.map((img) => {
+                // Entferne id und andere nicht erlaubte Felder
+                const { url, alt, isPrimary } = img;
+                return {
+                  url,
+                  alt,
+                  isPrimary: isPrimary ?? false,
+                };
+              }),
             }
           : undefined,
       },
