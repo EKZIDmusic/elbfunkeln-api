@@ -11,12 +11,16 @@ import {
   HttpCode,
   HttpStatus,
   ParseUUIDPipe,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../../core/auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../../../core/auth/guards/roles.guard';
 import { Roles } from '../../../core/auth/decorators/roles.decorator';
 import { ProductsService } from '../../products/products.service';
+import { ImagesService } from '../../images/images.service';
 import { CreateProductDto } from '../../products/dto/create-product.dto';
 import { UpdateProductDto } from '../../products/dto/update-product.dto';
 
@@ -26,7 +30,10 @@ import { UpdateProductDto } from '../../products/dto/update-product.dto';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('ADMIN', 'SHOP_OWNER')
 export class AdminProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private readonly imagesService: ImagesService,
+  ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new product (admin only)' })
@@ -115,5 +122,69 @@ export class AdminProductsController {
   @Roles('ADMIN')
   permanentDelete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return this.productsService.permanentDelete(id);
+  }
+
+  @Post(':id/images/upload')
+  @ApiOperation({ summary: 'Upload image for product (admin only)' })
+  @ApiConsumes('multipart/form-data')
+  @ApiParam({ name: 'id', description: 'Product ID' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+        alt: {
+          type: 'string',
+          description: 'Alternative text for image',
+        },
+        isPrimary: {
+          type: 'boolean',
+          description: 'Set as primary image',
+        },
+      },
+      required: ['file'],
+    },
+  })
+  @ApiResponse({ status: 201, description: 'Image uploaded successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request - invalid file' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 404, description: 'Product not found' })
+  @UseInterceptors(FileInterceptor('file'))
+  uploadImage(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) productId: string,
+    @UploadedFile() file: any,
+    @Body('alt') alt?: string,
+    @Body('isPrimary') isPrimary?: string,
+  ) {
+    return this.imagesService.uploadProductImage(
+      productId,
+      file,
+      alt,
+      isPrimary === 'true',
+    );
+  }
+
+  @Get(':id/images')
+  @ApiOperation({ summary: 'Get all images for a product (admin only)' })
+  @ApiParam({ name: 'id', description: 'Product ID' })
+  @ApiResponse({ status: 200, description: 'Images retrieved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  getProductImages(@Param('id', new ParseUUIDPipe({ version: '4' })) productId: string) {
+    return this.imagesService.getProductImages(productId);
+  }
+
+  @Delete(':productId/images/:imageId')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Delete product image (admin only)' })
+  @ApiParam({ name: 'productId', description: 'Product ID' })
+  @ApiParam({ name: 'imageId', description: 'Image ID' })
+  @ApiResponse({ status: 200, description: 'Image deleted successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 404, description: 'Image not found' })
+  deleteImage(@Param('imageId', new ParseUUIDPipe({ version: '4' })) imageId: string) {
+    return this.imagesService.deleteImage(imageId);
   }
 }
