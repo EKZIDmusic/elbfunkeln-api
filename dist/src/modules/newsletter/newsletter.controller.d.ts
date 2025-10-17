@@ -5,25 +5,25 @@ export declare class NewsletterController {
     constructor(newsletterService: NewsletterService);
     subscribe(subscribeDto: SubscribeDto): Promise<{
         id: string;
-        email: string;
-        createdAt: Date;
         isActive: boolean;
-        preferences: import("@prisma/client/runtime/library").JsonValue | null;
+        createdAt: Date;
+        email: string;
+        preferences: string | null;
     } | {
         message: string;
     }>;
     findAll(): Promise<{
         id: string;
-        email: string;
-        createdAt: Date;
         isActive: boolean;
-        preferences: import("@prisma/client/runtime/library").JsonValue | null;
+        createdAt: Date;
+        email: string;
+        preferences: string | null;
     }[]>;
     unsubscribe(email: string): Promise<{
         id: string;
-        email: string;
-        createdAt: Date;
         isActive: boolean;
-        preferences: import("@prisma/client/runtime/library").JsonValue | null;
+        createdAt: Date;
+        email: string;
+        preferences: string | null;
     }>;
 }

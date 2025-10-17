@@ -8,33 +8,33 @@ export declare class TicketsController {
     create(createTicketDto: CreateTicketDto): Promise<{
         user: {
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
             lastName: string | null;
-            displayName: string | null;
             phone: string | null;
             role: import("@prisma/client").$Enums.UserRole;
-            status: import("@prisma/client").$Enums.UserStatus;
             isVerified: boolean;
             isBanned: boolean;
-            twoFactorEnabled: boolean;
+            displayName: string | null;
             lastLogin: Date | null;
-            createdAt: Date;
-            updatedAt: Date;
+            status: import("@prisma/client").$Enums.UserStatus;
+            twoFactorEnabled: boolean;
         };
         messages: {
             id: string;
             createdAt: Date;
             content: string;
-            isStaff: boolean;
             ticketId: string;
+            isStaff: boolean;
         }[];
     } & {
         id: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
         createdAt: Date;
         updatedAt: Date;
+        status: import("@prisma/client").$Enums.TicketStatus;
         userId: string;
         subject: string;
         priority: import("@prisma/client").$Enums.TicketPriority;
@@ -43,33 +43,33 @@ export declare class TicketsController {
     findAll(status?: string): Promise<({
         user: {
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
             lastName: string | null;
-            displayName: string | null;
             phone: string | null;
             role: import("@prisma/client").$Enums.UserRole;
-            status: import("@prisma/client").$Enums.UserStatus;
             isVerified: boolean;
             isBanned: boolean;
-            twoFactorEnabled: boolean;
+            displayName: string | null;
             lastLogin: Date | null;
-            createdAt: Date;
-            updatedAt: Date;
+            status: import("@prisma/client").$Enums.UserStatus;
+            twoFactorEnabled: boolean;
         };
         messages: {
             id: string;
             createdAt: Date;
             content: string;
-            isStaff: boolean;
             ticketId: string;
+            isStaff: boolean;
         }[];
     } & {
         id: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
         createdAt: Date;
         updatedAt: Date;
+        status: import("@prisma/client").$Enums.TicketStatus;
         userId: string;
         subject: string;
         priority: import("@prisma/client").$Enums.TicketPriority;
@@ -78,33 +78,33 @@ export declare class TicketsController {
     findOne(id: string): Promise<{
         user: {
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             password: string;
             firstName: string | null;
             lastName: string | null;
-            displayName: string | null;
             phone: string | null;
             role: import("@prisma/client").$Enums.UserRole;
-            status: import("@prisma/client").$Enums.UserStatus;
             isVerified: boolean;
             isBanned: boolean;
-            twoFactorEnabled: boolean;
+            displayName: string | null;
             lastLogin: Date | null;
-            createdAt: Date;
-            updatedAt: Date;
+            status: import("@prisma/client").$Enums.UserStatus;
+            twoFactorEnabled: boolean;
         };
         messages: {
             id: string;
             createdAt: Date;
             content: string;
-            isStaff: boolean;
             ticketId: string;
+            isStaff: boolean;
         }[];
     } & {
         id: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
         createdAt: Date;
         updatedAt: Date;
+        status: import("@prisma/client").$Enums.TicketStatus;
         userId: string;
         subject: string;
         priority: import("@prisma/client").$Enums.TicketPriority;
@@ -112,9 +112,9 @@ export declare class TicketsController {
     }>;
     update(id: string, updateTicketDto: UpdateTicketDto): Promise<{
         id: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
         createdAt: Date;
         updatedAt: Date;
+        status: import("@prisma/client").$Enums.TicketStatus;
         userId: string;
         subject: string;
         priority: import("@prisma/client").$Enums.TicketPriority;
@@ -122,9 +122,9 @@ export declare class TicketsController {
     }>;
     remove(id: string): Promise<{
         id: string;
-        status: import("@prisma/client").$Enums.TicketStatus;
         createdAt: Date;
         updatedAt: Date;
+        status: import("@prisma/client").$Enums.TicketStatus;
         userId: string;
         subject: string;
         priority: import("@prisma/client").$Enums.TicketPriority;
@@ -134,14 +134,14 @@ export declare class TicketsController {
         id: string;
         createdAt: Date;
         content: string;
-        isStaff: boolean;
         ticketId: string;
+        isStaff: boolean;
     }>;
     getMessages(id: string): Promise<{
         id: string;
         createdAt: Date;
         content: string;
-        isStaff: boolean;
         ticketId: string;
+        isStaff: boolean;
     }[]>;
 }

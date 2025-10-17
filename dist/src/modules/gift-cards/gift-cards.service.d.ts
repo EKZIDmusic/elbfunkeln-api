@@ -7,68 +7,68 @@ export declare class GiftCardsService {
     constructor(prisma: PrismaService);
     create(createGiftCardDto: CreateGiftCardDto): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     findAll(): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }[]>;
     findByCode(code: string): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     findOne(id: string): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     update(id: string, updateGiftCardDto: UpdateGiftCardDto): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     remove(id: string): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     redeem(redeemGiftCardDto: RedeemGiftCardDto): Promise<{
@@ -76,36 +76,37 @@ export declare class GiftCardsService {
             items: ({
                 product: {
                     id: string;
-                    createdAt: Date;
-                    updatedAt: Date;
+                    sku: string;
                     name: string;
                     description: string;
-                    sku: string;
                     price: import("@prisma/client/runtime/library").Decimal;
                     discountPrice: import("@prisma/client/runtime/library").Decimal | null;
                     stock: number;
                     isActive: boolean;
                     isFeatured: boolean;
-                    giftboxavailable: boolean;
                     categoryId: string;
-                    isDeleted: boolean;
+                    createdAt: Date;
+                    updatedAt: Date;
+                    giftboxavailable: boolean;
                     deletedAt: Date | null;
+                    isDeleted: boolean;
                 };
             } & {
                 id: string;
                 price: import("@prisma/client/runtime/library").Decimal;
-                quantity: number;
                 productId: string;
                 orderId: string;
+                quantity: number;
             })[];
         } & {
             id: string;
-            status: import("@prisma/client").$Enums.OrderStatus;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
+            status: import("@prisma/client").$Enums.OrderStatus;
+            userId: string;
             orderNumber: string;
+            addressId: string;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
             subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -116,17 +117,16 @@ export declare class GiftCardsService {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
-            addressId: string;
         };
         giftCard: {
             id: string;
-            createdAt: Date;
             isActive: boolean;
+            createdAt: Date;
             code: string;
-            expiresAt: Date | null;
             amount: import("@prisma/client/runtime/library").Decimal;
-            balance: import("@prisma/client/runtime/library").Decimal;
             purchasedBy: string | null;
+            expiresAt: Date | null;
+            balance: import("@prisma/client/runtime/library").Decimal;
             usedAt: Date | null;
         };
         redeemedAmount: number;

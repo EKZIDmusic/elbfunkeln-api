@@ -7,11 +7,11 @@ export declare class AdminContactController {
     getInquiries(query: ContactQueryDto): Promise<{
         data: {
             id: string;
-            email: string;
-            status: import("@prisma/client").$Enums.ContactStatus;
+            name: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
+            email: string;
+            status: import("@prisma/client").$Enums.ContactStatus;
             subject: string;
             message: string;
         }[];
@@ -24,21 +24,21 @@ export declare class AdminContactController {
     }>;
     getInquiryById(id: string): Promise<{
         id: string;
-        email: string;
-        status: import("@prisma/client").$Enums.ContactStatus;
+        name: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
+        email: string;
+        status: import("@prisma/client").$Enums.ContactStatus;
         subject: string;
         message: string;
     }>;
     updateInquiry(id: string, updateContactInquiryDto: UpdateContactInquiryDto): Promise<{
         id: string;
-        email: string;
-        status: import("@prisma/client").$Enums.ContactStatus;
+        name: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
+        email: string;
+        status: import("@prisma/client").$Enums.ContactStatus;
         subject: string;
         message: string;
     }>;

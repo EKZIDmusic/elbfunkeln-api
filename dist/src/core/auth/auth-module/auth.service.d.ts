@@ -8,19 +8,19 @@ export declare class AuthService {
     constructor(prisma: PrismaService, jwtService: JwtService);
     register(registerDto: RegisterDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         email: string;
         firstName: string | null;
         lastName: string | null;
-        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string | null;
         lastLogin: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
     login(loginDto: LoginDto): Promise<{
         access_token: string;
@@ -32,19 +32,19 @@ export declare class AuthService {
     }>;
     validateUser(userId: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         email: string;
         password: string;
         firstName: string | null;
         lastName: string | null;
-        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string | null;
         lastLogin: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
 }

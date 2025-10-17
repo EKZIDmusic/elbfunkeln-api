@@ -23,7 +23,9 @@
       "Bash(git push:*)",
       "Read(//c/Users/kvhfw/elbfunkeln-projekt/**)",
       "Bash(node:*)",
-      "Read(//c/Users/kvhfw/**)"
+      "Read(//c/Users/kvhfw/**)",
+      "Bash(npx prisma db pull:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

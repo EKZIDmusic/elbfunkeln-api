@@ -68,15 +68,28 @@ let ProductsService = class ProductsService {
                             { isPrimary: 'desc' },
                             { createdAt: 'asc' }
                         ],
-                        take: 1
+                        take: 1,
+                        select: {
+                            id: true,
+                            alt: true,
+                            isPrimary: true,
+                            url: true,
+                        },
                     },
                 },
                 orderBy: { createdAt: 'desc' },
             }),
             this.prisma.product.count({ where }),
         ]);
+        const productsWithImageUrls = products.map((product) => ({
+            ...product,
+            images: product.images.map((img) => ({
+                ...img,
+                url: img.url || `/api/images/${img.id}`,
+            })),
+        }));
         return {
-            data: products,
+            data: productsWithImageUrls,
             meta: {
                 page,
                 limit,
@@ -93,16 +106,29 @@ let ProductsService = class ProductsService {
             },
             include: {
                 category: true,
-                images: true,
+                images: {
+                    select: {
+                        id: true,
+                        alt: true,
+                        isPrimary: true,
+                        url: true,
+                    },
+                },
             },
         });
         if (!product) {
             throw new common_1.NotFoundException('Product not found');
         }
-        return product;
+        return {
+            ...product,
+            images: product.images.map((img) => ({
+                ...img,
+                url: img.url || `/api/images/${img.id}`,
+            })),
+        };
     }
     async findFeatured() {
-        return this.prisma.product.findMany({
+        const products = await this.prisma.product.findMany({
             where: { isFeatured: true, isActive: true, isDeleted: false },
             include: {
                 category: true,
@@ -111,14 +137,27 @@ let ProductsService = class ProductsService {
                         { isPrimary: 'desc' },
                         { createdAt: 'asc' }
                     ],
-                    take: 1
+                    take: 1,
+                    select: {
+                        id: true,
+                        alt: true,
+                        isPrimary: true,
+                        url: true,
+                    },
                 },
             },
             take: 10,
         });
+        return products.map((product) => ({
+            ...product,
+            images: product.images.map((img) => ({
+                ...img,
+                url: img.url || `/api/images/${img.id}`,
+            })),
+        }));
     }
     async search(query) {
-        return this.prisma.product.findMany({
+        const products = await this.prisma.product.findMany({
             where: {
                 AND: [
                     { isActive: true },
@@ -139,10 +178,23 @@ let ProductsService = class ProductsService {
                         { isPrimary: 'desc' },
                         { createdAt: 'asc' }
                     ],
-                    take: 1
+                    take: 1,
+                    select: {
+                        id: true,
+                        alt: true,
+                        isPrimary: true,
+                        url: true,
+                    },
                 },
             },
         });
+        return products.map((product) => ({
+            ...product,
+            images: product.images.map((img) => ({
+                ...img,
+                url: img.url || `/api/images/${img.id}`,
+            })),
+        }));
     }
     async update(id, updateProductDto) {
         await this.findOne(id);

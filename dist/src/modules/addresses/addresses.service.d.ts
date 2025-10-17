@@ -6,67 +6,67 @@ export declare class AddressesService {
     constructor(prisma: PrismaService);
     create(userId: string, createAddressDto: CreateAddressDto): Promise<{
         id: string;
+        createdAt: Date;
         firstName: string;
         lastName: string;
-        createdAt: Date;
+        userId: string;
         street: string;
         city: string;
         state: string | null;
         zip: string;
         country: string;
         isDefault: boolean;
-        userId: string;
     }>;
     findAll(userId: string): Promise<{
         id: string;
+        createdAt: Date;
         firstName: string;
         lastName: string;
-        createdAt: Date;
+        userId: string;
         street: string;
         city: string;
         state: string | null;
         zip: string;
         country: string;
         isDefault: boolean;
-        userId: string;
     }[]>;
     findOne(id: string, userId: string): Promise<{
         id: string;
+        createdAt: Date;
         firstName: string;
         lastName: string;
-        createdAt: Date;
+        userId: string;
         street: string;
         city: string;
         state: string | null;
         zip: string;
         country: string;
         isDefault: boolean;
-        userId: string;
     }>;
     update(id: string, userId: string, updateAddressDto: UpdateAddressDto): Promise<{
         id: string;
+        createdAt: Date;
         firstName: string;
         lastName: string;
-        createdAt: Date;
+        userId: string;
         street: string;
         city: string;
         state: string | null;
         zip: string;
         country: string;
         isDefault: boolean;
-        userId: string;
     }>;
     remove(id: string, userId: string): Promise<{
         id: string;
+        createdAt: Date;
         firstName: string;
         lastName: string;
-        createdAt: Date;
+        userId: string;
         street: string;
         city: string;
         state: string | null;
         zip: string;
         country: string;
         isDefault: boolean;
-        userId: string;
     }>;
 }

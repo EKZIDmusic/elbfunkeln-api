@@ -6,34 +6,34 @@ export declare class ReviewsController {
     private readonly reviewsService;
     constructor(reviewsService: ReviewsService);
     create(user: UserPayload, createReviewDto: CreateReviewDto): Promise<{
-        user: {
-            id: string;
-            firstName: string;
-            lastName: string;
-        };
         product: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
+        };
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;
@@ -45,10 +45,10 @@ export declare class ReviewsController {
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     })[]> | Promise<({
@@ -56,34 +56,36 @@ export declare class ReviewsController {
             images: {
                 id: string;
                 createdAt: Date;
+                data: Uint8Array | null;
+                url: string | null;
+                mimeType: string | null;
+                alt: string | null;
                 isPrimary: boolean;
                 productId: string;
-                url: string;
-                alt: string | null;
             }[];
         } & {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     })[]>;
@@ -99,75 +101,75 @@ export declare class ReviewsController {
         };
     }>;
     findOne(id: string): Promise<{
-        user: {
-            id: string;
-            firstName: string;
-            lastName: string;
-        };
         product: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
+        };
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;
     update(id: string, user: UserPayload, updateReviewDto: UpdateReviewDto): Promise<{
-        user: {
-            id: string;
-            firstName: string;
-            lastName: string;
-        };
         product: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
+        };
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;
     remove(id: string, user: UserPayload): Promise<{
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;

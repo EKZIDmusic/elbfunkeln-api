@@ -5,66 +5,66 @@ export declare class ReviewsService {
     private prisma;
     constructor(prisma: PrismaService);
     create(userId: string, createReviewDto: CreateReviewDto): Promise<{
-        user: {
-            id: string;
-            firstName: string;
-            lastName: string;
-        };
         product: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
+        };
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;
     findAll(): Promise<({
-        user: {
-            id: string;
-            firstName: string;
-            lastName: string;
-        };
         product: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
+        };
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     })[]>;
@@ -76,10 +76,10 @@ export declare class ReviewsService {
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     })[]>;
@@ -88,107 +88,109 @@ export declare class ReviewsService {
             images: {
                 id: string;
                 createdAt: Date;
+                data: Uint8Array | null;
+                url: string | null;
+                mimeType: string | null;
+                alt: string | null;
                 isPrimary: boolean;
                 productId: string;
-                url: string;
-                alt: string | null;
             }[];
         } & {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     })[]>;
     findOne(id: string): Promise<{
-        user: {
-            id: string;
-            firstName: string;
-            lastName: string;
-        };
         product: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
+        };
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;
     update(id: string, userId: string, updateReviewDto: UpdateReviewDto): Promise<{
-        user: {
-            id: string;
-            firstName: string;
-            lastName: string;
-        };
         product: {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
+        };
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
         };
     } & {
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;
     remove(id: string, userId: string): Promise<{
         id: string;
-        isVerified: boolean;
         createdAt: Date;
-        userId: string;
         productId: string;
+        isVerified: boolean;
+        userId: string;
         rating: number;
         comment: string | null;
     }>;

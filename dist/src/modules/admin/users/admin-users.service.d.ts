@@ -6,70 +6,70 @@ export declare class AdminUsersService {
     constructor(prisma: PrismaService);
     getUsers(query: UserQueryDto): Promise<{
         id: string;
-        email: string;
-        firstName: string;
-        lastName: string;
-        displayName: string;
-        phone: string;
-        role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
-        isVerified: boolean;
-        isBanned: boolean;
-        twoFactorEnabled: boolean;
-        lastLogin: Date;
         createdAt: Date;
         updatedAt: Date;
         _count: {
             orders: number;
             sessions: number;
         };
+        email: string;
+        firstName: string;
+        lastName: string;
+        phone: string;
+        role: import("@prisma/client").$Enums.UserRole;
+        isVerified: boolean;
+        isBanned: boolean;
+        displayName: string;
+        lastLogin: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }[]>;
     getUserById(id: string): Promise<{
         id: string;
-        email: string;
-        firstName: string;
-        lastName: string;
-        displayName: string;
-        phone: string;
-        role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
-        isVerified: boolean;
-        isBanned: boolean;
-        twoFactorEnabled: boolean;
-        lastLogin: Date;
         createdAt: Date;
         updatedAt: Date;
         _count: {
-            orders: number;
             favorites: number;
             reviews: number;
-            sessions: number;
+            orders: number;
             activities: number;
+            sessions: number;
         };
-    }>;
-    updateUser(id: string, updateUserDto: UpdateUserDto): Promise<{
-        id: string;
         email: string;
         firstName: string;
         lastName: string;
-        displayName: string;
         phone: string;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string;
         lastLogin: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
+    }>;
+    updateUser(id: string, updateUserDto: UpdateUserDto): Promise<{
+        id: string;
         createdAt: Date;
         updatedAt: Date;
+        email: string;
+        firstName: string;
+        lastName: string;
+        phone: string;
+        role: import("@prisma/client").$Enums.UserRole;
+        isVerified: boolean;
+        isBanned: boolean;
+        displayName: string;
+        lastLogin: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
     deleteUser(id: string): Promise<{
         message: string;
     }>;
     getUserSessions(userId: string, activeOnly?: boolean): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         userId: string;
         expiresAt: Date;
         deviceName: string | null;
@@ -87,13 +87,13 @@ export declare class AdminUsersService {
     }>;
     getUserActivities(userId: string, limit?: number): Promise<{
         id: string;
-        createdAt: Date;
         description: string | null;
+        createdAt: Date;
         userId: string;
         ipAddress: string | null;
         userAgent: string | null;
         actionType: string;
         success: boolean;
-        metadata: import("@prisma/client/runtime/library").JsonValue | null;
+        metadata: string | null;
     }[]>;
 }

@@ -11,12 +11,13 @@ export declare class AnalyticsController {
         };
         data: {
             id: string;
-            status: import("@prisma/client").$Enums.OrderStatus;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
+            status: import("@prisma/client").$Enums.OrderStatus;
+            userId: string;
             orderNumber: string;
+            addressId: string;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
             subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -27,7 +28,6 @@ export declare class AnalyticsController {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
-            addressId: string;
         }[];
     }>;
     getTicketData(startDate: string, endDate: string): Promise<{

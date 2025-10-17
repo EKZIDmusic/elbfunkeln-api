@@ -7,46 +7,46 @@ export declare class GiftCardsController {
     constructor(giftCardsService: GiftCardsService);
     create(user: UserPayload, createGiftCardDto: CreateGiftCardDto): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     findAll(): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }[]>;
     findByCode(code: string): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
     update(id: string, updateGiftCardDto: UpdateGiftCardDto): Promise<{
         id: string;
-        createdAt: Date;
         isActive: boolean;
+        createdAt: Date;
         code: string;
-        expiresAt: Date | null;
         amount: import("@prisma/client/runtime/library").Decimal;
-        balance: import("@prisma/client/runtime/library").Decimal;
         purchasedBy: string | null;
+        expiresAt: Date | null;
+        balance: import("@prisma/client/runtime/library").Decimal;
         usedAt: Date | null;
     }>;
 }

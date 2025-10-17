@@ -31,6 +31,7 @@ const shipping_module_1 = require("./modules/shipping/shipping.module");
 const email_module_1 = require("./shared/email/email.module");
 const admin_module_1 = require("./modules/admin/admin.module");
 const contact_module_1 = require("./modules/contact/contact.module");
+const images_module_1 = require("./modules/images/images.module");
 const jwt_auth_guard_1 = require("./core/auth/guards/jwt-auth.guard");
 let AppModule = class AppModule {
 };
@@ -67,6 +68,7 @@ exports.AppModule = AppModule = __decorate([
             email_module_1.EmailModule,
             admin_module_1.AdminModule,
             contact_module_1.ContactModule,
+            images_module_1.ImagesModule,
         ],
         providers: [
             {

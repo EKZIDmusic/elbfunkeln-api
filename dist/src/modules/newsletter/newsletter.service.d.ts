@@ -9,33 +9,33 @@ export declare class NewsletterService {
     constructor(prisma: PrismaService, emailService: EmailService);
     subscribe(subscribeDto: SubscribeDto): Promise<{
         id: string;
-        email: string;
-        createdAt: Date;
         isActive: boolean;
-        preferences: import("@prisma/client/runtime/library").JsonValue | null;
+        createdAt: Date;
+        email: string;
+        preferences: string | null;
     } | {
         message: string;
     }>;
     findAll(): Promise<{
         id: string;
-        email: string;
-        createdAt: Date;
         isActive: boolean;
-        preferences: import("@prisma/client/runtime/library").JsonValue | null;
+        createdAt: Date;
+        email: string;
+        preferences: string | null;
     }[]>;
     unsubscribe(email: string): Promise<{
         id: string;
-        email: string;
-        createdAt: Date;
         isActive: boolean;
-        preferences: import("@prisma/client/runtime/library").JsonValue | null;
+        createdAt: Date;
+        email: string;
+        preferences: string | null;
     }>;
     remove(id: string): Promise<{
         id: string;
-        email: string;
-        createdAt: Date;
         isActive: boolean;
-        preferences: import("@prisma/client/runtime/library").JsonValue | null;
+        createdAt: Date;
+        email: string;
+        preferences: string | null;
     }>;
     sendNewsletter(sendNewsletterDto: SendNewsletterDto): Promise<{
         total: number;

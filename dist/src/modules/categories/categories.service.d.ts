@@ -7,130 +7,132 @@ export declare class CategoriesService {
     create(createCategoryDto: CreateCategoryDto): Promise<{
         parent: {
             id: string;
-            createdAt: Date;
             name: string;
-            slug: string;
             description: string | null;
+            createdAt: Date;
+            slug: string;
             parentId: string | null;
         };
         children: {
             id: string;
-            createdAt: Date;
             name: string;
-            slug: string;
             description: string | null;
+            createdAt: Date;
+            slug: string;
             parentId: string | null;
         }[];
     } & {
         id: string;
-        createdAt: Date;
         name: string;
-        slug: string;
         description: string | null;
+        createdAt: Date;
+        slug: string;
         parentId: string | null;
     }>;
     findAll(): Promise<({
-        children: {
-            id: string;
-            createdAt: Date;
-            name: string;
-            slug: string;
-            description: string | null;
-            parentId: string | null;
-        }[];
         _count: {
             products: number;
         };
+        children: {
+            id: string;
+            name: string;
+            description: string | null;
+            createdAt: Date;
+            slug: string;
+            parentId: string | null;
+        }[];
     } & {
         id: string;
-        createdAt: Date;
         name: string;
-        slug: string;
         description: string | null;
+        createdAt: Date;
+        slug: string;
         parentId: string | null;
     })[]>;
     findOne(id: string): Promise<{
         parent: {
             id: string;
-            createdAt: Date;
             name: string;
-            slug: string;
             description: string | null;
+            createdAt: Date;
+            slug: string;
             parentId: string | null;
         };
         children: {
             id: string;
-            createdAt: Date;
             name: string;
-            slug: string;
             description: string | null;
+            createdAt: Date;
+            slug: string;
             parentId: string | null;
         }[];
         products: ({
             images: {
                 id: string;
                 createdAt: Date;
+                data: Uint8Array | null;
+                url: string | null;
+                mimeType: string | null;
+                alt: string | null;
                 isPrimary: boolean;
                 productId: string;
-                url: string;
-                alt: string | null;
             }[];
         } & {
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
+            sku: string;
             name: string;
             description: string;
-            sku: string;
             price: import("@prisma/client/runtime/library").Decimal;
             discountPrice: import("@prisma/client/runtime/library").Decimal | null;
             stock: number;
             isActive: boolean;
             isFeatured: boolean;
-            giftboxavailable: boolean;
             categoryId: string;
-            isDeleted: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            giftboxavailable: boolean;
             deletedAt: Date | null;
+            isDeleted: boolean;
         })[];
     } & {
         id: string;
-        createdAt: Date;
         name: string;
-        slug: string;
         description: string | null;
+        createdAt: Date;
+        slug: string;
         parentId: string | null;
     }>;
     update(id: string, updateCategoryDto: UpdateCategoryDto): Promise<{
         parent: {
             id: string;
-            createdAt: Date;
             name: string;
-            slug: string;
             description: string | null;
+            createdAt: Date;
+            slug: string;
             parentId: string | null;
         };
         children: {
             id: string;
-            createdAt: Date;
             name: string;
-            slug: string;
             description: string | null;
+            createdAt: Date;
+            slug: string;
             parentId: string | null;
         }[];
     } & {
         id: string;
-        createdAt: Date;
         name: string;
-        slug: string;
         description: string | null;
+        createdAt: Date;
+        slug: string;
         parentId: string | null;
     }>;
     remove(id: string): Promise<{
         id: string;
-        createdAt: Date;
         name: string;
-        slug: string;
         description: string | null;
+        createdAt: Date;
+        slug: string;
         parentId: string | null;
     }>;
 }

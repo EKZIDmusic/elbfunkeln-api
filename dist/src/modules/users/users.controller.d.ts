@@ -5,14 +5,28 @@ export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
     getProfile(user: UserPayload): Promise<{
+        addresses: {
+            id: string;
+            createdAt: Date;
+            firstName: string;
+            lastName: string;
+            userId: string;
+            street: string;
+            city: string;
+            state: string | null;
+            zip: string;
+            country: string;
+            isDefault: boolean;
+        }[];
         orders: {
             id: string;
-            status: import("@prisma/client").$Enums.OrderStatus;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
+            status: import("@prisma/client").$Enums.OrderStatus;
+            userId: string;
             orderNumber: string;
+            addressId: string;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
             subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -23,26 +37,12 @@ export declare class UsersController {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
-            addressId: string;
-        }[];
-        addresses: {
-            id: string;
-            firstName: string;
-            lastName: string;
-            createdAt: Date;
-            street: string;
-            city: string;
-            state: string | null;
-            zip: string;
-            country: string;
-            isDefault: boolean;
-            userId: string;
         }[];
         tickets: {
             id: string;
-            status: import("@prisma/client").$Enums.TicketStatus;
             createdAt: Date;
             updatedAt: Date;
+            status: import("@prisma/client").$Enums.TicketStatus;
             userId: string;
             subject: string;
             priority: import("@prisma/client").$Enums.TicketPriority;
@@ -50,47 +50,61 @@ export declare class UsersController {
         }[];
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         email: string;
         password: string;
         firstName: string | null;
         lastName: string | null;
-        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string | null;
         lastLogin: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
     updateProfile(user: UserPayload, updateUserDto: UpdateUserDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         email: string;
         password: string;
         firstName: string | null;
         lastName: string | null;
-        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string | null;
         lastLogin: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
     findOne(id: string): Promise<{
+        addresses: {
+            id: string;
+            createdAt: Date;
+            firstName: string;
+            lastName: string;
+            userId: string;
+            street: string;
+            city: string;
+            state: string | null;
+            zip: string;
+            country: string;
+            isDefault: boolean;
+        }[];
         orders: {
             id: string;
-            status: import("@prisma/client").$Enums.OrderStatus;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
+            status: import("@prisma/client").$Enums.OrderStatus;
+            userId: string;
             orderNumber: string;
+            addressId: string;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
             subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -101,26 +115,12 @@ export declare class UsersController {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
-            addressId: string;
-        }[];
-        addresses: {
-            id: string;
-            firstName: string;
-            lastName: string;
-            createdAt: Date;
-            street: string;
-            city: string;
-            state: string | null;
-            zip: string;
-            country: string;
-            isDefault: boolean;
-            userId: string;
         }[];
         tickets: {
             id: string;
-            status: import("@prisma/client").$Enums.TicketStatus;
             createdAt: Date;
             updatedAt: Date;
+            status: import("@prisma/client").$Enums.TicketStatus;
             userId: string;
             subject: string;
             priority: import("@prisma/client").$Enums.TicketPriority;
@@ -128,34 +128,48 @@ export declare class UsersController {
         }[];
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         email: string;
         password: string;
         firstName: string | null;
         lastName: string | null;
-        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string | null;
         lastLogin: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
 }
 export declare class AccountSettingsController {
     private readonly usersService;
     constructor(usersService: UsersService);
     getAccountSettings(id: string): Promise<{
+        addresses: {
+            id: string;
+            createdAt: Date;
+            firstName: string;
+            lastName: string;
+            userId: string;
+            street: string;
+            city: string;
+            state: string | null;
+            zip: string;
+            country: string;
+            isDefault: boolean;
+        }[];
         orders: {
             id: string;
-            status: import("@prisma/client").$Enums.OrderStatus;
             createdAt: Date;
             updatedAt: Date;
-            userId: string;
             discount: import("@prisma/client/runtime/library").Decimal;
+            status: import("@prisma/client").$Enums.OrderStatus;
+            userId: string;
             orderNumber: string;
+            addressId: string;
             paymentStatus: import("@prisma/client").$Enums.PaymentStatus;
             shippingStatus: import("@prisma/client").$Enums.ShippingStatus;
             subtotal: import("@prisma/client/runtime/library").Decimal;
@@ -166,26 +180,12 @@ export declare class AccountSettingsController {
             trackingNumber: string | null;
             stripePaymentId: string | null;
             discountCode: string | null;
-            addressId: string;
-        }[];
-        addresses: {
-            id: string;
-            firstName: string;
-            lastName: string;
-            createdAt: Date;
-            street: string;
-            city: string;
-            state: string | null;
-            zip: string;
-            country: string;
-            isDefault: boolean;
-            userId: string;
         }[];
         tickets: {
             id: string;
-            status: import("@prisma/client").$Enums.TicketStatus;
             createdAt: Date;
             updatedAt: Date;
+            status: import("@prisma/client").$Enums.TicketStatus;
             userId: string;
             subject: string;
             priority: import("@prisma/client").$Enums.TicketPriority;
@@ -193,36 +193,36 @@ export declare class AccountSettingsController {
         }[];
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         email: string;
         password: string;
         firstName: string | null;
         lastName: string | null;
-        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string | null;
         lastLogin: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
     updateAccountSettings(id: string, updateUserDto: UpdateUserDto): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         email: string;
         password: string;
         firstName: string | null;
         lastName: string | null;
-        displayName: string | null;
         phone: string | null;
         role: import("@prisma/client").$Enums.UserRole;
-        status: import("@prisma/client").$Enums.UserStatus;
         isVerified: boolean;
         isBanned: boolean;
-        twoFactorEnabled: boolean;
+        displayName: string | null;
         lastLogin: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        status: import("@prisma/client").$Enums.UserStatus;
+        twoFactorEnabled: boolean;
     }>;
 }
